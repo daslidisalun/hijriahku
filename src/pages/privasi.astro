@@ -1,0 +1,66 @@
+---
+import Utama from '../layouts/Utama.astro';
+import { u } from '../lib/base.js';
+---
+<Utama title="Privasi — HijriahKu" description="Kebijakan privasi HijriahKu: semua perhitungan berjalan lokal di browser, tanpa akun dan tanpa pelacakan.">
+  <div class="bungkus bagian">
+    <h1 class="tengah">Privasi</h1>
+    <section class="ed">
+      <p>
+        HijriahKu dirancang agar dapat digunakan tanpa menyerahkan data pribadi apa pun. Halaman ini
+        menjelaskan secara ringkas apa yang terjadi — dan yang tidak terjadi — dengan data Anda ketika
+        menggunakan situs ini.
+      </p>
+
+      <h2>Semua Perhitungan Berlangsung di Perangkat Anda</h2>
+      <p>
+        Seluruh perkakas di situs ini bekerja sepenuhnya di peramban Anda. Konversi tanggal pada
+        <a href={u('/konverter/')}>konverter</a>, penyusunan
+        <a href={u('/kalender-hijriah/')}>kalender Hijriah</a>, dan penghitungan sisa hari pada
+        <a href={u('/hitung-mundur/')}>hitung mundur</a> dikerjakan oleh peramban dengan fasilitas
+        kalender bawaan, langsung di perangkat yang Anda pakai. Tanggal lahir, tanggal dokumen, atau
+        tanggal lain yang Anda masukkan tidak dikirim ke server mana pun, tidak dicatat, dan tidak
+        disimpan oleh kami. HijriahKu bahkan tidak mengoperasikan server aplikasi untuk menerima data
+        semacam itu: yang Anda unduh dari situs ini hanyalah berkas halaman, dan setelah halaman
+        terbuka, perhitungan berjalan sendiri di perangkat Anda.
+      </p>
+
+      <h2>Tanpa Akun, Tanpa Pelacakan</h2>
+      <p>
+        Situs ini tidak menyediakan pendaftaran dan tidak meminta nama, alamat email, nomor telepon,
+        atau keterangan pribadi lainnya untuk menggunakan perkakasnya. Kami juga tidak memasang alat
+        analitik, piksel pelacakan, atau kuki (cookie) untuk mengikuti perilaku pengunjung antarhalaman
+        maupun antarsitus. Kunjungan Anda tidak dibuatkan profil, dan tidak ada data kunjungan yang
+        dijual atau dibagikan kepada pihak lain, karena memang tidak ada data semacam itu yang kami
+        kumpulkan.
+      </p>
+
+      <h2>Satu-Satunya Pemuatan dari Luar: Font</h2>
+      <p>
+        Agar tampilan hurufnya konsisten, halaman situs ini memuat berkas font dari Google Fonts.
+        Itulah satu-satunya pemuatan dari server pihak ketiga di HijriahKu. Ketika peramban Anda
+        mengambil berkas font tersebut, permintaan itu diproses oleh server Google sesuai kebijakan
+        privasi Google yang berlaku untuk layanannya. Di luar pemuatan font ini, seluruh berkas yang
+        membentuk situs — teks, gaya tampilan, dan skrip perkakas — berasal dari domain situs ini
+        sendiri.
+      </p>
+
+      <h2>Hitungan Tasbih Hanya di Memori Halaman</h2>
+      <p>
+        Angka pada <a href={u('/tasbih/')}>tasbih digital</a> disimpan hanya di memori halaman yang
+        sedang terbuka. Hitungan itu tidak ditulis ke penyimpanan peramban, tidak dikirim ke mana pun,
+        dan hilang begitu halaman ditutup atau dimuat ulang. Tidak ada riwayat penggunaan tasbih yang
+        dapat kami — atau siapa pun — lihat kembali.
+      </p>
+
+      <h2>Perubahan Kebijakan Ini</h2>
+      <p>
+        Apabila di kemudian hari situs ini menampilkan iklan atau menambahkan layanan yang melibatkan
+        pihak ketiga, halaman ini akan diperbarui terlebih dahulu atau bersamaan dengan penerapannya,
+        dengan penjelasan mengenai data apa yang terlibat. Selama pemberitahuan itu belum ada, kebijakan
+        yang berlaku adalah yang tertulis di halaman ini. Pertanyaan mengenai privasi dapat disampaikan
+        melalui halaman <a href={u('/kontak/')}>Kontak</a> atau ke hijriahku@gmail.com.
+      </p>
+    </section>
+  </div>
+</Utama>

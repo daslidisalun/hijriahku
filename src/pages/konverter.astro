@@ -1,0 +1,133 @@
+---
+import Utama from '../layouts/Utama.astro';
+import EdKonverter from '../konten/ed-konverter.astro';
+import { BULAN_HIJRIAH } from '../lib/hijri.js';
+---
+<Utama
+  title="Konverter Tanggal Hijriah–Masehi — HijriahKu"
+  description="Konversi tanggal Masehi ke Hijriah dan Hijriah ke Masehi dengan kalender Umm al-Qura, lengkap dengan hari dan hitung umur dalam tahun Hijriah."
+>
+  <div class="bungkus">
+    <section class="bagian tengah">
+      <p class="label-kecil">Perkakas</p>
+      <h1>Konverter Tanggal Hijriah–Masehi</h1>
+      <p class="sempit">
+        Dua arah konversi dalam satu halaman, dihitung dari kalender Umm al-Qura —
+        kalender hisab yang menjadi rujukan penanggalan sipil Arab Saudi.
+      </p>
+    </section>
+
+    <div class="duo">
+      <section class="lengkung-kecil" aria-label="Masehi ke Hijriah">
+        <h2 style="margin-top:0">Masehi → Hijriah</h2>
+        <form id="g-form">
+          <label for="g-input">Tanggal Masehi</label>
+          <input type="date" id="g-input" required />
+          <button class="tombol" type="submit" id="g-tombol">Konversi</button>
+        </form>
+        <div class="hasil" id="g-hasil" hidden>
+          <span class="utama" id="g-utama"></span>
+          <div id="g-rinci"></div>
+        </div>
+      </section>
+
+      <section class="lengkung-kecil" aria-label="Hijriah ke Masehi">
+        <h2 style="margin-top:0">Hijriah → Masehi</h2>
+        <form id="h-form">
+          <label for="h-tgl">Tanggal</label>
+          <input type="number" id="h-tgl" min="1" max="30" value="1" required />
+          <label for="h-bln">Bulan Hijriah</label>
+          <select id="h-bln">
+            {BULAN_HIJRIAH.map((b, i) => <option value={i + 1}>{i + 1}. {b.nama}</option>)}
+          </select>
+          <label for="h-thn">Tahun Hijriah</label>
+          <input type="number" id="h-thn" min="1" max="1600" value="1447" required />
+          <button class="tombol" type="submit" id="h-tombol">Konversi</button>
+        </form>
+        <div class="hasil" id="h-hasil" hidden>
+          <span class="utama" id="h-utama"></span>
+          <div id="h-rinci"></div>
+        </div>
+        <p class="catatan-metode" id="h-galat" hidden></p>
+      </section>
+    </div>
+
+    <section class="bagian">
+      <div class="kartu">
+        <h2 style="margin-top:0">Umur dalam Hijriah</h2>
+        <p>
+          Karena tahun Hijriah lebih pendek ±11 hari, umur Anda dalam tahun Hijriah
+          selalu sedikit lebih besar daripada umur Masehi. Masukkan tanggal lahir
+          untuk melihat umur Hijriah Anda hari ini dan tanggal ulang tahun Hijriah
+          berikutnya.
+        </p>
+        <form id="u-form">
+          <label for="u-lahir">Tanggal lahir (Masehi)</label>
+          <input type="date" id="u-lahir" required />
+          <button class="tombol" type="submit" id="u-tombol">Hitung Umur Hijriah</button>
+        </form>
+        <div class="hasil" id="u-hasil" hidden>
+          <span class="utama" id="u-utama"></span>
+          <div id="u-rinci"></div>
+        </div>
+      </div>
+    </section>
+
+    <p class="catatan-metode">
+      Tanggal Hijriah di situs ini mengikuti hisab kalender Umm al-Qura. Tanggal resmi
+      awal Ramadan, Idul Fitri, dan Idul Adha di Indonesia ditetapkan lewat sidang isbat
+      Kementerian Agama dan dapat berbeda satu hari.
+    </p>
+
+    <EdKonverter />
+  </div>
+
+  <script>
+    import { gKeH, hKeG, formatH, formatG, formatGLengkap, dariISO, umurHijriah, hariIniLokal } from '../lib/hijri.js';
+
+    document.getElementById('g-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = document.getElementById('g-input').value;
+      if (!v) return;
+      const g = dariISO(v);
+      document.getElementById('g-utama').textContent = formatH(gKeH(g));
+      document.getElementById('g-rinci').textContent = formatGLengkap(g);
+      document.getElementById('g-hasil').hidden = false;
+    });
+
+    document.getElementById('h-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const h = {
+        d: +document.getElementById('h-tgl').value,
+        m: +document.getElementById('h-bln').value,
+        y: +document.getElementById('h-thn').value,
+      };
+      const galat = document.getElementById('h-galat');
+      try {
+        const g = hKeG(h);
+        document.getElementById('h-utama').textContent = formatGLengkap(g);
+        document.getElementById('h-rinci').textContent = 'Padanan Masehi untuk ' + formatH(h);
+        document.getElementById('h-hasil').hidden = false;
+        galat.hidden = true;
+      } catch (err) {
+        document.getElementById('h-hasil').hidden = true;
+        galat.textContent = 'Tanggal Hijriah itu tidak ada pada bulan dan tahun tersebut (bulan Hijriah hanya 29 atau 30 hari). Coba tanggal 29 untuk bulan yang lebih pendek.';
+        galat.hidden = false;
+      }
+    });
+
+    document.getElementById('u-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = document.getElementById('u-lahir').value;
+      if (!v) return;
+      const lahir = dariISO(v);
+      const hasil = umurHijriah(lahir, hariIniLokal());
+      document.getElementById('u-utama').textContent =
+        `${hasil.tahun} tahun, ${hasil.bulan} bulan, ${hasil.hari} hari`;
+      document.getElementById('u-rinci').textContent =
+        `Anda lahir pada ${formatH(gKeH(lahir))}. Ulang tahun Hijriah berikutnya: ` +
+        `${formatH(hasil.ultahBerikut.h)} — ${formatGLengkap(hasil.ultahBerikut.g)}.`;
+      document.getElementById('u-hasil').hidden = false;
+    });
+  </script>
+</Utama>

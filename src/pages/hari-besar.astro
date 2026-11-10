@@ -1,0 +1,116 @@
+---
+import Utama from '../layouts/Utama.astro';
+import EdHariBesar from '../konten/ed-haribesar.astro';
+import { PERINGATAN, hKeG, formatH, formatG, namaHari, keISO } from '../lib/hijri.js';
+
+const TAHUN = [1447, 1448];
+const daftar = TAHUN.map((y) => ({
+  tahun: y,
+  item: PERINGATAN.map((p) => {
+    const g = hKeG({ d: p.d, m: p.m, y });
+    return { ...p, g, iso: keISO(g) };
+  }),
+}));
+---
+<Utama
+  title="Hari Besar Islam 1447–1448 H — HijriahKu"
+  description="Daftar hari besar dan peringatan Islam 1447 dan 1448 Hijriah — Tahun Baru, Asyura, Maulid, Isra Mikraj, Nisfu Syaban, Ramadan, Nuzulul Quran, Idul Fitri, Arafah, Idul Adha — dengan tanggal Masehi padanannya."
+>
+  <div class="bungkus">
+    <section class="bagian tengah">
+      <p class="label-kecil">Kalender</p>
+      <h1>Hari Besar Islam 1447–1448 H</h1>
+      <p class="sempit">
+        Sepuluh peringatan utama dalam kalender Hijriah beserta padanan tanggal
+        Masehi-nya menurut hisab Umm al-Qura. Lencana menunjukkan posisi setiap
+        tanggal terhadap hari ini.
+      </p>
+    </section>
+
+    <EdHariBesar />
+
+    {daftar.map((grup) => (
+      <section class="bagian">
+        <h2>Tahun {grup.tahun} Hijriah</h2>
+        <div>
+          {grup.item.map((p) => (
+            <article class="item-besar" data-tanggal={p.iso}>
+              <div class="kapan">
+                <span class="h">{formatH({ d: p.d, m: p.m, y: grup.tahun })}</span>
+                <span class="g">{namaHari(p.g)}, {formatG(p.g)}</span>
+                <span class="lencana" data-lencana hidden></span>
+              </div>
+              <div>
+                <h3>{p.nama}</h3>
+                <p>{p.keterangan}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section class="bagian">
+      <div class="kartu">
+        <h2 style="margin-top:0">Sepuluh Malam Terakhir Ramadan &amp; Lailatul Qadar</h2>
+        <p>
+          Lailatul Qadar — malam yang dalam Al-Quran digambarkan lebih baik daripada
+          seribu bulan — diyakini jatuh pada salah satu malam di sepuluh malam
+          terakhir Ramadan, dan riwayat menganjurkan mencarinya terutama pada
+          malam-malam ganjil. Karena malam pastinya tidak ditetapkan, HijriahKu
+          hanya menampilkan <strong>rentang</strong> sepuluh malam terakhir Ramadan
+          berikutnya, bukan satu tanggal tunggal:
+        </p>
+        <p class="tengah" style="font-size:1.1rem">
+          <strong id="lk-rentang">Memuat…</strong><br />
+          <span style="color:var(--tinta-lembut)" id="lk-rinci"></span>
+        </p>
+        <p class="catatan-metode">
+          Rentang dihitung dari hisab Umm al-Qura; awal Ramadan resmi di Indonesia
+          ditetapkan lewat sidang isbat dan dapat menggeser rentang ini satu hari.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import { berikutnyaH, hKeG, gKeH, formatG, formatH, hariIniLokal, keISO } from '../lib/hijri.js';
+
+    // Lencana status: sudah lewat / hari ini / berikutnya / mendatang
+    const ini = hariIniLokal();
+    const isoIni = keISO(ini);
+    let berikutSudah = false;
+    document.querySelectorAll('.item-besar').forEach((el) => {
+      const t = el.dataset.tanggal;
+      const lencana = el.querySelector('[data-lencana]');
+      if (!lencana) return;
+      if (t < isoIni) {
+        lencana.textContent = 'Sudah lewat';
+        lencana.className = 'lencana lewat';
+      } else if (t === isoIni) {
+        lencana.textContent = 'Hari ini';
+        lencana.className = 'lencana sekarang';
+      } else if (!berikutSudah) {
+        lencana.textContent = 'Berikutnya';
+        lencana.className = 'lencana berikutnya';
+        berikutSudah = true;
+      } else {
+        lencana.textContent = 'Mendatang';
+        lencana.className = 'lencana lewat';
+      }
+      lencana.hidden = false;
+    });
+
+    // Rentang sepuluh malam terakhir Ramadan berikutnya
+    const awalRamadan = berikutnyaH(1, 9, ini);
+    const yR = gKeH(awalRamadan).y;
+    const malam21 = hKeG({ d: 21, m: 9, y: yR });
+    const akhirBulan = hKeG({ d: 1, m: 10, y: yR });
+    const malamTerakhir = new Date(Date.UTC(akhirBulan.y, akhirBulan.m - 1, akhirBulan.d) - 86400000);
+    const gAkhir = { y: malamTerakhir.getUTCFullYear(), m: malamTerakhir.getUTCMonth() + 1, d: malamTerakhir.getUTCDate() };
+    document.getElementById('lk-rentang').textContent =
+      `${formatG(malam21)} — ${formatG(gAkhir)}`;
+    document.getElementById('lk-rinci').textContent =
+      `Malam 21 Ramadan sampai malam terakhir Ramadan ${yR} H (bulan Ramadan berakhir pada ${formatH(gKeH(gAkhir))}).`;
+  </script>
+</Utama>

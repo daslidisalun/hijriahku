@@ -1,0 +1,63 @@
+---
+import Utama from '../layouts/Utama.astro';
+import { u } from '../lib/base.js';
+---
+<Utama title="Kontak — HijriahKu" description="Hubungi HijriahKu lewat email untuk laporan perbedaan tanggal, koreksi konten, dan saran fitur.">
+  <div class="bungkus bagian">
+    <h1 class="tengah">Kontak</h1>
+    <section class="ed">
+      <p>
+        HijriahKu tidak menyediakan formulir kontak dan tidak meminta Anda membuat akun. Satu-satunya
+        saluran untuk menghubungi pengelola adalah surat elektronik ke alamat berikut:
+      </p>
+      <p>
+        <strong><a href="mailto:hijriahku@gmail.com">hijriahku@gmail.com</a></strong>
+      </p>
+      <p>
+        Tulis subjek yang jelas agar pesan Anda cepat dipahami, misalnya “Laporan tanggal: 1 Syawal
+        1448” atau “Saran fitur konverter”. Semakin lengkap keterangan yang Anda sertakan, semakin
+        cepat pesan dapat kami periksa.
+      </p>
+
+      <h2>Pesan yang Dapat Kami Bantu</h2>
+      <ul>
+        <li>
+          <strong>Laporan perbedaan tanggal.</strong> Apabila hasil konversi atau tanggal pada daftar
+          <a href={u('/hari-besar/')}>hari besar</a> berbeda dari rujukan yang Anda pegang, sampaikan
+          tanggal yang Anda periksa beserta rujukannya — misalnya keputusan resmi, kalender cetak, atau
+          kalender dari lembaga yang Anda ikuti. Laporan semacam ini kami uji ulang terhadap mesin
+          hitung dan sumber resmi, sebagaimana pola verifikasi yang dijelaskan di halaman
+          <a href={u('/tentang/')}>Tentang &amp; Metode</a>.
+        </li>
+        <li>
+          <strong>Koreksi konten.</strong> Kesalahan tulis, keterangan yang keliru, atau tautan yang
+          tidak bekerja pada halaman mana pun di situs ini, termasuk artikel
+          <a href={u('/blog/')}>blog</a>, silakan laporkan dengan menyebutkan alamat halamannya.
+        </li>
+        <li>
+          <strong>Saran fitur.</strong> Usulan perkakas atau perbaikan tampilan diterima dengan senang
+          hati. Mohon pahami bahwa tidak semua usulan dapat diwujudkan, tetapi setiap usulan yang
+          masuk dicatat dan dipertimbangkan.
+        </li>
+      </ul>
+
+      <h2>Hal yang Tidak Kami Layani</h2>
+      <p>
+        Kami tidak menjawab pertanyaan mengenai ketetapan ibadah, hukum suatu amalan, atau permintaan
+        fatwa. HijriahKu adalah situs utilitas penanggalan, bukan lembaga keagamaan, sebagaimana
+        ditegaskan di halaman <a href={u('/disclaimer/')}>Disclaimer</a>. Untuk pertanyaan semacam itu,
+        silakan hubungi Kementerian Agama, kantor urusan agama, atau lembaga keagamaan setempat yang
+        Anda ikuti, karena merekalah yang berwenang memberikan ketetapan.
+      </p>
+
+      <h2>Waktu Tanggapan</h2>
+      <p>
+        Situs ini dikelola oleh tim kecil, sehingga balasan umumnya memerlukan waktu beberapa hari
+        kerja. Pesan yang bersifat laporan kekeliruan tanggal kami dahulukan pemeriksaannya. Apabila
+        pesan Anda belum berbalas setelah satu pekan, Anda boleh mengirimkannya kembali — mungkin pesan
+        pertama tersangkut di penyaring spam. Kami tidak mengirimkan surat promosi dan tidak membagikan
+        alamat email pengirim pesan kepada pihak lain.
+      </p>
+    </section>
+  </div>
+</Utama>

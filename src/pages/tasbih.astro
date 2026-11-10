@@ -1,0 +1,138 @@
+---
+import Utama from '../layouts/Utama.astro';
+import EdTasbih from '../konten/ed-tasbih.astro';
+import { DZIKIR_DATA as DZIKIR } from '../lib/dzikir.js';
+---
+<Utama
+  title="Tasbih Digital — Penghitung Dzikir Online — HijriahKu"
+  description="Tasbih digital untuk menghitung dzikir di layar: pilihan bacaan dengan teks Arab, target 33, 99, 100, atau kustom, cincin kemajuan, dan getar saat putaran selesai."
+>
+  <div class="bungkus">
+    <section class="bagian tengah">
+      <p class="label-kecil">Perkakas</p>
+      <h1>Tasbih Digital</h1>
+      <p class="sempit">
+        Pilih bacaan, tentukan target, lalu ketuk lingkaran besar — atau tekan
+        tombol spasi — untuk menghitung. Hitungan hanya tersimpan di halaman ini.
+      </p>
+    </section>
+
+    <section class="tasbih-bungkus kartu">
+      <div class="pil-dzikir" id="pil-dzikir" role="group" aria-label="Pilih dzikir">
+        {DZIKIR.map((z, i) => (
+          <button type="button" data-dzikir={i} class={i === 0 ? 'aktif' : ''}>{z.latin}</button>
+        ))}
+      </div>
+      <p class="tengah" style="margin:2px 0">
+        <span class="arab" style="font-size:1.5rem" id="dzikir-arab">{DZIKIR[0].arab}</span><br />
+        <span id="dzikir-arti" style="color:var(--tinta-lembut)">{DZIKIR[0].arti}</span>
+      </p>
+
+      <div class="cincin-bungkus">
+        <svg width="250" height="250" viewBox="0 0 250 250" aria-hidden="true">
+          <circle cx="125" cy="125" r="112" fill="none" stroke="#e0d5b8" stroke-width="7" />
+          <circle id="tasbih-cincin" cx="125" cy="125" r="112" fill="none" stroke="#c9a227" stroke-width="7"
+            stroke-linecap="round" stroke-dasharray="703.7" stroke-dashoffset="703.7" />
+        </svg>
+        <button class="tombol-tasbih" id="tasbih-tombol" type="button" aria-label="Ketuk untuk menghitung dzikir">
+          <span class="dzikir-arab" id="tombol-arab">{DZIKIR[0].arab}</span>
+          <span class="dzikir-latin" id="tombol-latin">{DZIKIR[0].latin}</span>
+          <span style="font-size:0.8rem; opacity:0.85">ketuk / spasi</span>
+        </button>
+      </div>
+
+      <p style="margin:0"><span class="angka-tasbih" id="tasbih-angka">0</span> <span style="color:var(--tinta-lembut)">/ <span id="tasbih-target-tampil">33</span></span></p>
+      <p style="margin:0; color:var(--tinta-lembut)">
+        Putaran selesai: <strong id="tasbih-putaran">0</strong> · Total keseluruhan: <strong id="tasbih-total">0</strong>
+      </p>
+
+      <div class="pil-target" role="group" aria-label="Pilih target">
+        <span style="font-size:0.9rem; color:var(--tinta-lembut)">Target:</span>
+        <button type="button" data-target="33" class="aktif">33</button>
+        <button type="button" data-target="99">99</button>
+        <button type="button" data-target="100">100</button>
+        <input type="number" id="target-kustom" min="1" max="100000" placeholder="Kustom" aria-label="Target kustom" />
+      </div>
+      <button class="tombol" type="button" id="tasbih-atur">Atur Ulang</button>
+      <p id="tasbih-status" style="color:var(--zamrud); font-weight:600; min-height:1.4em; margin-bottom:0"></p>
+    </section>
+
+    <EdTasbih />
+  </div>
+
+  <script>
+    import { DZIKIR_DATA } from '../lib/dzikir.js';
+
+    let idx = 0;
+    let target = 33;
+    let hitung = 0;
+    let putaran = 0;
+    let total = 0;
+    const KELILING = 703.7;
+
+    const el = (id) => document.getElementById(id);
+    function gambar() {
+      el('tasbih-angka').textContent = hitung;
+      el('tasbih-target-tampil').textContent = target;
+      el('tasbih-putaran').textContent = putaran;
+      el('tasbih-total').textContent = total;
+      el('tasbih-cincin').style.strokeDashoffset = String(KELILING * (1 - hitung / target));
+    }
+    function ketuk() {
+      hitung++; total++;
+      if (hitung >= target) {
+        putaran++;
+        hitung = 0;
+        el('tasbih-status').textContent = `Putaran ${putaran} selesai — ${target} kali ${DZIKIR_DATA[idx].latin}.`;
+        if (navigator.vibrate) navigator.vibrate(200);
+      } else {
+        el('tasbih-status').textContent = '';
+      }
+      gambar();
+    }
+    el('tasbih-tombol')?.addEventListener('click', ketuk);
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && !/INPUT|SELECT|TEXTAREA|BUTTON/.test(document.activeElement?.tagName ?? '')) {
+        e.preventDefault();
+        ketuk();
+      }
+    });
+    document.querySelectorAll('[data-dzikir]').forEach((b) => {
+      b.addEventListener('click', () => {
+        idx = +b.dataset.dzikir;
+        document.querySelectorAll('[data-dzikir]').forEach((x) => x.classList.toggle('aktif', x === b));
+        el('dzikir-arab').textContent = DZIKIR_DATA[idx].arab;
+        el('dzikir-arti').textContent = DZIKIR_DATA[idx].arti;
+        el('tombol-arab').textContent = DZIKIR_DATA[idx].arab;
+        el('tombol-latin').textContent = DZIKIR_DATA[idx].latin;
+        hitung = 0;
+        el('tasbih-status').textContent = '';
+        gambar();
+      });
+    });
+    document.querySelectorAll('[data-target]').forEach((b) => {
+      b.addEventListener('click', () => {
+        target = +b.dataset.target;
+        document.querySelectorAll('[data-target]').forEach((x) => x.classList.toggle('aktif', x === b));
+        el('target-kustom').value = '';
+        hitung = 0;
+        gambar();
+      });
+    });
+    el('target-kustom')?.addEventListener('change', (e) => {
+      const v = parseInt(e.target.value, 10);
+      if (v > 0) {
+        target = v;
+        document.querySelectorAll('[data-target]').forEach((x) => x.classList.remove('aktif'));
+        hitung = 0;
+        gambar();
+      }
+    });
+    el('tasbih-atur')?.addEventListener('click', () => {
+      hitung = 0; putaran = 0; total = 0;
+      el('tasbih-status').textContent = '';
+      gambar();
+    });
+    gambar();
+  </script>
+</Utama>

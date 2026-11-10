@@ -1,0 +1,216 @@
+---
+import Utama from '../layouts/Utama.astro';
+import { u } from '../lib/base.js';
+---
+<Utama title="Tentang & Metode — HijriahKu" description="Misi, metode hisab Umm al-Qura, dan hasil verifikasi tanggal HijriahKu terhadap ketetapan resmi pemerintah.">
+  <div class="bungkus bagian">
+    <h1 class="tengah">Tentang &amp; Metode</h1>
+    <section class="ed">
+      <h2>Misi HijriahKu</h2>
+      <p>
+        HijriahKu adalah situs utilitas penanggalan yang membantu kebutuhan sehari-hari terkait
+        kalender Hijriah dan kalender Masehi. Kebutuhan itu nyata dan beragam: seseorang ingin
+        mengetahui padanan Hijriah dari tanggal lahirnya untuk keperluan dokumen atau sekadar rasa
+        ingin tahu; sebuah keluarga merencanakan acara dan perlu memastikan tanggalnya tidak
+        bertabrakan dengan hari besar; seorang guru, pelajar, atau penulis ingin belajar bagaimana
+        kalender Hijriah tersusun dan bagaimana ia berjalan berdampingan dengan kalender Masehi;
+        sebuah komunitas ingin tahu berapa hari lagi menuju Ramadan atau Idul Fitri. Untuk semua
+        kebutuhan tersebut, HijriahKu menyediakan perkakas yang dapat langsung dipakai tanpa
+        pendaftaran dan tanpa biaya: <a href={u('/konverter/')}>konverter tanggal</a> dua arah antara
+        Hijriah dan Masehi, <a href={u('/kalender-hijriah/')}>kalender Hijriah</a> per bulan,
+        <a href={u('/hari-besar/')}>daftar hari besar</a> tahun 1447–1448 H,
+        <a href={u('/hitung-mundur/')}>hitung mundur</a> menuju hari besar terdekat, dan
+        <a href={u('/tasbih/')}>tasbih digital</a> sederhana. Penjelasan tambahan mengenai kalender
+        dan cara membaca hasil konversi diterbitkan berkala di <a href={u('/blog/')}>blog</a>.
+      </p>
+      <p>
+        Kedudukan situs ini sengaja dibatasi dengan jelas. HijriahKu adalah alat bantu penanggalan,
+        bukan lembaga keagamaan, bukan otoritas penetapan hari besar, dan bukan pengganti pengumuman
+        resmi pemerintah. Kami menghitung tanggal dengan metode yang terbuka dan dapat diperiksa,
+        kami menuliskan batas-batas metode itu apa adanya, dan kami menyerahkan ketetapan resmi
+        kepada lembaga yang memang berwenang menetapkannya. Halaman ini menjelaskan metode tersebut
+        secara lengkap, termasuk hasil pengujian mesin hitung kami terhadap tanggal-tanggal resmi
+        yang telah ditetapkan pemerintah — baik yang cocok persis maupun yang berbeda satu hari.
+      </p>
+
+      <h2>Metode &amp; Sumber</h2>
+      <h3>Mesin hitung: hisab Umm al-Qura melalui Intl</h3>
+      <p>
+        Seluruh konversi di HijriahKu dikerjakan oleh kalender Umm al-Qura, yaitu kalender hisab
+        aritmetik yang awal bulannya ditentukan dengan kaidah hitung tetap berdasarkan perhitungan
+        posisi bulan. Implementasinya tidak kami tulis dari nol dan tidak pula diambil dari layanan
+        pihak ketiga: kami memakai fasilitas Intl bawaan peramban, tepatnya kalender Islam Umm
+        al-Qura yang tersedia melalui <em>Intl.DateTimeFormat</em> dengan lokal kalender islamic-umalqura.
+        Artinya, perhitungan berjalan sepenuhnya di perangkat pengunjung — tanpa server, tanpa basis
+        data tanggal, dan tanpa memanggil API dari luar. Tanggal yang Anda masukkan tidak pernah
+        meninggalkan peramban Anda, sebagaimana dijelaskan di halaman
+        <a href={u('/privasi/')}>Privasi</a>.
+      </p>
+      <p>
+        Konversi dari Masehi ke Hijriah dibaca langsung dari mesin Intl tersebut. Konversi sebaliknya,
+        dari Hijriah ke Masehi, dikerjakan dengan pencarian biner: mesin mencari tanggal Masehi yang
+        hasil konversi Hijriahnya sama persis dengan tanggal Hijriah yang diminta, dengan mempersempit
+        rentang pencarian secara berulang sampai ditemukan padanan tunggalnya. Cara ini menjamin kedua
+        arah konversi selalu konsisten satu sama lain, karena keduanya bersumber dari mesin yang sama.
+        Label metode yang berlaku di seluruh situs adalah: Tanggal Hijriah di situs ini mengikuti hisab
+        kalender Umm al-Qura. Tanggal resmi awal Ramadan, Idul Fitri, dan Idul Adha di Indonesia
+        ditetapkan lewat sidang isbat Kementerian Agama dan dapat berbeda satu hari.
+      </p>
+
+      <h3>Verifikasi terhadap ketetapan resmi pemerintah</h3>
+      <p>
+        Agar pengunjung dapat menilai sendiri seberapa jauh hasil mesin dapat diandalkan, kami menguji
+        keluaran mesin terhadap tanggal resmi hari besar Islam yang ditetapkan pemerintah Indonesia
+        melalui Surat Keputusan Bersama (SKB) 3 Menteri tentang Hari Libur Nasional dan Cuti Bersama.
+        Rujukan yang dipakai adalah SKB tahun 2026 — ditandatangani Menteri Agama Nomor 1497 Tahun 2025,
+        Menteri Ketenagakerjaan Nomor 2 Tahun 2025, dan Menteri PANRB Nomor 5 Tahun 2025 — serta SKB
+        tahun 2027 — Menteri Agama Nomor 1205 Tahun 2026, Menteri Ketenagakerjaan Nomor 3 Tahun 2026,
+        dan Menteri PANRB Nomor 2 Tahun 2026 — sebagaimana dirilis melalui Sekretariat Negara. Sembilan
+        tanggal peringatan kami bandingkan satu per satu. Hasilnya: enam tanggal cocok persis, dan tiga
+        tanggal berbeda satu hari dengan mesin satu hari lebih awal dari tanggal resmi.
+      </p>
+      <p>Tabel pertama memuat tanggal-tanggal yang cocok persis antara mesin dan ketetapan resmi:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Peringatan</th>
+            <th>Tanggal Masehi (resmi dan mesin)</th>
+            <th>Tanggal Hijriah</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Isra Mikraj Nabi Muhammad</td>
+            <td>16 Januari 2026</td>
+            <td>27 Rajab 1447 H</td>
+            <td>Cocok</td>
+          </tr>
+          <tr>
+            <td>Idul Adha</td>
+            <td>27 Mei 2026</td>
+            <td>10 Dzulhijah 1447 H</td>
+            <td>Cocok</td>
+          </tr>
+          <tr>
+            <td>Tahun Baru Hijriah</td>
+            <td>16 Juni 2026</td>
+            <td>1 Muharam 1448 H</td>
+            <td>Cocok</td>
+          </tr>
+          <tr>
+            <td>Maulid Nabi Muhammad</td>
+            <td>25 Agustus 2026</td>
+            <td>12 Rabiulawal 1448 H</td>
+            <td>Cocok</td>
+          </tr>
+          <tr>
+            <td>Isra Mikraj Nabi Muhammad</td>
+            <td>5 Januari 2027</td>
+            <td>27 Rajab 1448 H</td>
+            <td>Cocok</td>
+          </tr>
+          <tr>
+            <td>Tahun Baru Hijriah</td>
+            <td>6 Juni 2027</td>
+            <td>1 Muharam 1449 H</td>
+            <td>Cocok</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Tabel kedua memuat tanggal-tanggal yang berbeda satu hari. Pada ketiga kasus ini mesin Umm
+        al-Qura menghasilkan tanggal satu hari lebih awal daripada ketetapan resmi:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Peringatan</th>
+            <th>Tanggal Hijriah</th>
+            <th>Tanggal resmi (SKB)</th>
+            <th>Tanggal menurut mesin</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Idul Fitri</td>
+            <td>1 Syawal 1447 H</td>
+            <td>21 Maret 2026</td>
+            <td>20 Maret 2026</td>
+            <td>Beda 1 hari</td>
+          </tr>
+          <tr>
+            <td>Idul Fitri</td>
+            <td>1 Syawal 1448 H</td>
+            <td>10 Maret 2027</td>
+            <td>9 Maret 2027</td>
+            <td>Beda 1 hari</td>
+          </tr>
+          <tr>
+            <td>Idul Adha</td>
+            <td>10 Dzulhijah 1448 H</td>
+            <td>17 Mei 2027</td>
+            <td>16 Mei 2027</td>
+            <td>Beda 1 hari</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Perbedaan ini dapat dijelaskan dan bukan kesalahan hitung. Ketetapan resmi Indonesia mengikuti
+        hasil sidang isbat, yaitu penetapan yang menggabungkan hisab dengan rukyatul hilal — pengamatan
+        hilal pada akhir bulan berjalan — serta istikmal, penggenapan bulan menjadi tiga puluh hari
+        apabila hilal tidak terlihat. Umm al-Qura, sebaliknya, adalah kalender hisab aritmetik tetap:
+        awal bulannya diputuskan oleh kaidah hitung yang sama untuk semua tempat, tanpa menunggu hasil
+        pengamatan. Kedua pendekatan dapat menghasilkan awal bulan yang berbeda satu hari, dan pada
+        ketiga kasus di atas perbedaan itu memang terjadi pada bulan-bulan yang penetapannya paling
+        diperhatikan, yaitu Syawal dan Dzulhijah. Kebijakan HijriahKu tegas dalam hal ini: situs ini
+        tidak menimpa hasil mesin dengan tanggal resmi. Keluaran konverter dan kalender selalu murni
+        hasil hisab Umm al-Qura, sedangkan perbedaan terhadap ketetapan resmi ditulis terbuka di
+        halaman ini dan pada keterangan hari besar terkait, agar pengunjung dapat memutuskan sendiri
+        rujukan mana yang sesuai dengan keperluannya.
+      </p>
+
+      <h3>Uji bolak-balik mesin</h3>
+      <p>
+        Selain verifikasi terhadap ketetapan resmi, mesin juga diuji konsistensi internalnya dengan
+        uji bolak-balik. Sebanyak 109 tanggal Masehi yang tersebar merata — satu tanggal setiap 37
+        hari dalam rentang tahun 2020 sampai 2030 — dikonversi ke Hijriah, lalu hasil Hijriahnya
+        dikonversi kembali ke Masehi. Seluruhnya, 100 persen dari 109 tanggal, kembali persis ke
+        tanggal Masehi semula tanpa selisih satu hari pun. Hasil ini menunjukkan bahwa konversi dua
+        arah di situs ini konsisten dan tidak menggeser tanggal dalam proses bolak-balik, termasuk
+        pada tahun kabisat dan pada pergantian tahun Hijriah.
+      </p>
+
+      <h3>Perbedaan praktik antarorganisasi, disajikan netral</h3>
+      <p>
+        Pengunjung juga perlu mengetahui bahwa di Indonesia terdapat lebih dari satu pendekatan dalam
+        menentukan awal bulan Hijriah, dan perbedaan tanggal sesekali memang terjadi di masyarakat.
+        Kementerian Agama menetapkan awal Ramadan, Syawal, dan Dzulhijah melalui sidang isbat yang
+        memadukan hisab dan rukyatul hilal. Muhammadiyah menggunakan hisab hakiki dengan kriteria
+        wujudul hilal, yaitu bulan baru dianggap mulai apabila hilal telah wujud di atas ufuk saat
+        matahari terbenam menurut perhitungan. Nahdlatul Ulama mendasarkan penetapan pada rukyat,
+        yaitu pengamatan hilal, dengan istikmal sebagai penyempurna apabila hilal tidak terlihat.
+        HijriahKu menjelaskan ketiga pendekatan ini secara faktual dan tidak memihak salah satunya:
+        situs ini bukan peserta dalam perdebatan metode, melainkan alat penanggalan yang metodenya —
+        hisab Umm al-Qura — dinyatakan secara terbuka. Untuk mengikuti ketetapan yang berlaku bagi
+        keperluan ibadah dan administrasi, pengunjung kami arahkan pada pengumuman resmi pemerintah
+        dan lembaga yang mereka ikuti, sebagaimana juga ditegaskan di halaman
+        <a href={u('/disclaimer/')}>Disclaimer</a>.
+      </p>
+
+      <h2>Siapa yang Mengelola</h2>
+      <p>
+        HijriahKu dikelola oleh tim kecil yang merangkap pengembangan perkakas, penulisan konten, dan
+        pemeliharaan situs. Karena seluruh perhitungan berjalan di peramban pengunjung, situs ini tidak
+        mengoperasikan server aplikasi dan tidak menyimpan data pengunjung. Masukan yang paling kami
+        hargai adalah laporan mengenai tanggal: apabila Anda menemukan hasil konversi yang berbeda
+        dari rujukan yang Anda pegang, atau menemukan keterangan yang keliru, sampaikan melalui halaman
+        <a href={u('/kontak/')}>Kontak</a> atau langsung ke hijriahku@gmail.com, lengkap dengan tanggal
+        yang Anda periksa dan rujukan pembandingnya. Laporan semacam itu kami periksa terhadap mesin
+        dan terhadap sumber resmi, dan apabila ditemukan kekeliruan pada konten kami, perbaikannya
+        akan diterbitkan beserta penjelasan metode yang berlaku.
+      </p>
+    </section>
+  </div>
+</Utama>

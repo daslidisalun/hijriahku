@@ -1,0 +1,40 @@
+---
+import Utama from './Utama.astro';
+import { u } from '../lib/base.js';
+import { ARTIKEL } from '../lib/blog.js';
+
+interface Props {
+  judul: string;
+  deskripsi: string;
+  tanggal: string;
+  tanggalTampil: string;
+  slug: string;
+}
+const { judul, deskripsi, tanggalTampil, slug } = Astro.props;
+const lain = ARTIKEL.filter((a) => a.slug !== slug);
+---
+<Utama title={`${judul} — HijriahKu`} description={deskripsi}>
+  <div class="bungkus">
+    <header class="artikel-kepala sempit">
+      <p class="tanggal">{tanggalTampil} · Blog HijriahKu</p>
+      <h1>{judul}</h1>
+      <p class="ornamen" aria-hidden="true">✦ ✦ ✦</p>
+    </header>
+    <article class="ed">
+      <slot />
+    </article>
+    <section class="sempit" aria-label="Artikel lain">
+      <h2>Artikel lain</h2>
+      <div class="daftar-artikel">
+        {lain.map((a) => (
+          <div class="kartu">
+            <p class="tgl">{a.tanggalTampil}</p>
+            <h3><a href={u(`/blog/${a.slug}/`)}>{a.judul}</a></h3>
+            <p>{a.deskripsi}</p>
+          </div>
+        ))}
+      </div>
+      <p class="tengah"><a class="tombol" href={u('/blog/')}>← Semua artikel</a></p>
+    </section>
+  </div>
+</Utama>

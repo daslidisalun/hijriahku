@@ -1,0 +1,75 @@
+---
+import Utama from '../layouts/Utama.astro';
+import EdHitungMundur from '../konten/ed-hitungmundur.astro';
+
+const kartu = [
+  { id: 'ramadan', judul: '1 Ramadan', d: 1, m: 9, isbat: true },
+  { id: 'fitri', judul: 'Idul Fitri (1 Syawal)', d: 1, m: 10, isbat: true },
+  { id: 'adha', judul: 'Idul Adha (10 Dzulhijah)', d: 10, m: 12, isbat: true },
+  { id: 'muharam', judul: 'Tahun Baru Hijriah (1 Muharam)', d: 1, m: 1, isbat: false },
+];
+---
+<Utama
+  title="Hitung Mundur Ramadan, Idul Fitri & Idul Adha — HijriahKu"
+  description="Hitung mundur langsung menuju 1 Ramadan, Idul Fitri, Idul Adha, dan Tahun Baru Hijriah terdekat — dihitung dari kalender Umm al-Qura dan diperbarui setiap detik."
+>
+  <div class="bungkus">
+    <section class="bagian tengah">
+      <p class="label-kecil">Perkakas</p>
+      <h1>Hitung Mundur Hari Besar</h1>
+      <p class="sempit">
+        Empat tanggal yang paling sering ditunggu, dihitung dari kemunculan
+        berikutnya menurut hisab Umm al-Qura dan diperbarui setiap detik.
+      </p>
+    </section>
+
+    <div class="grid-mundur">
+      {kartu.map((k) => (
+        <section class="kartu mundur" id={`cm-${k.id}`} data-d={k.d} data-m={k.m}>
+          <h2 style="margin-top:0">{k.judul}</h2>
+          <p class="tgl-h" data-f="tglh">Memuat…</p>
+          <p class="tgl" data-f="tglg"></p>
+          <p class="sisa" data-f="sisa"></p>
+          <p class="jam" data-f="jam"></p>
+          {k.isbat && <p class="catatan-metode">Tanggal resmi menunggu sidang isbat Kemenag; dapat berbeda satu hari.</p>}
+        </section>
+      ))}
+    </div>
+
+    <EdHitungMundur />
+  </div>
+
+  <script>
+    import { gKeH, formatH, formatGLengkap, berikutnyaH, hariIniLokal } from '../lib/hijri.js';
+
+    const ini = hariIniLokal();
+    const target = new Map();
+    document.querySelectorAll('.mundur').forEach((el) => {
+      const d = +el.dataset.d, m = +el.dataset.m;
+      const g = berikutnyaH(d, m, ini);
+      target.set(el.id, g);
+      el.querySelector('[data-f="tglh"]').textContent = formatH({ d, m, y: gKeH(g).y });
+      el.querySelector('[data-f="tglg"]').textContent = formatGLengkap(g);
+    });
+
+    function segarkan() {
+      const now = new Date();
+      target.forEach((g, id) => {
+        const el = document.getElementById(id);
+        const sasaran = new Date(g.y, g.m - 1, g.d);
+        let ms = sasaran - now;
+        if (ms < 0) ms = 0;
+        const hari = Math.floor(ms / 86400000);
+        const sisa = ms - hari * 86400000;
+        const jam = Math.floor(sisa / 3600000);
+        const menit = Math.floor((sisa - jam * 3600000) / 60000);
+        const detik = Math.floor((sisa - jam * 3600000 - menit * 60000) / 1000);
+        el.querySelector('[data-f="sisa"]').textContent = hari + ' hari lagi';
+        el.querySelector('[data-f="jam"]').textContent =
+          String(jam).padStart(2, '0') + ':' + String(menit).padStart(2, '0') + ':' + String(detik).padStart(2, '0');
+      });
+    }
+    segarkan();
+    setInterval(segarkan, 1000);
+  </script>
+</Utama>

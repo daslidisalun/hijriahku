@@ -1,0 +1,114 @@
+---
+import Utama from '../layouts/Utama.astro';
+import { u } from '../lib/base.js';
+import EdBeranda from '../konten/ed-beranda.astro';
+
+const alat = [
+  { href: '/konverter/', judul: 'Konverter Hijriah–Masehi', isi: 'Ubah tanggal Masehi ke Hijriah dan sebaliknya, plus hitung umur Anda dalam tahun Hijriah.' },
+  { href: '/hitung-mundur/', judul: 'Hitung Mundur Hari Besar', isi: 'Sisa hari menuju Ramadan, Idul Fitri, Idul Adha, dan Tahun Baru Hijriah — diperbarui setiap detik.' },
+  { href: '/tasbih/', judul: 'Tasbih Digital', isi: 'Penghitung dzikir di layar dengan target 33, 99, 100, atau kustom — tanpa perlu memasang aplikasi.' },
+  { href: '/kalender-hijriah/', judul: 'Kalender Hijriah', isi: 'Grid bulan Hijriah lengkap dengan padanan tanggal Masehi di setiap selnya.' },
+  { href: '/hari-besar/', judul: 'Hari Besar Islam', isi: 'Daftar peringatan 1447–1448 H: Tahun Baru, Asyura, Maulid, Isra Mikraj, Idul Fitri, Idul Adha, dan lainnya.' },
+  { href: '/blog/', judul: 'Blog', isi: 'Sejarah kalender Hijriah, penjelasan hisab dan rukyat, dan panduan konversi tanggal langkah demi langkah.' },
+];
+---
+<Utama
+  title="HijriahKu — Kalender & Utilitas Hijriah untuk Sehari-hari"
+  description="Tanggal Hijriah hari ini, konverter Hijriah–Masehi, hitung mundur Ramadan dan Idul Fitri, kalender Hijriah, daftar hari besar Islam, dan tasbih digital — berdasarkan hisab Umm al-Qura."
+>
+  <div class="bungkus">
+    <section class="pahlawan">
+      <div class="lengkung">
+        <p class="label-kecil">Tanggal Hijriah hari ini</p>
+        <p class="tanggal-besar" id="hari-ini-h">Memuat…</p>
+        <p class="tanggal-masehi" id="hari-ini-g"></p>
+        <p class="ornamen" aria-hidden="true">✦</p>
+        <form id="cepat-form">
+          <label for="cepat-tanggal">Konversi cepat — pilih tanggal Masehi</label>
+          <input type="date" id="cepat-tanggal" />
+          <button class="tombol" type="submit">Lihat Tanggal Hijriahnya</button>
+        </form>
+        <div class="hasil" id="cepat-hasil" hidden>
+          <span class="utama" id="cepat-utama"></span>
+          <div id="cepat-rinci"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bagian">
+      <div class="kartu mundur">
+        <p class="label-kecil">Hitung mundur</p>
+        <h2 style="margin-top:6px">Ramadan Berikutnya</h2>
+        <p class="tgl-h" id="sisa-ramadan-tglh">Memuat…</p>
+        <p class="tgl" id="sisa-ramadan-tglg"></p>
+        <p class="sisa" id="sisa-ramadan-hari"></p>
+        <p class="jam" id="sisa-ramadan-jam"></p>
+        <a class="tombol tombol-emas" href={u('/hitung-mundur/')}>Semua hitung mundur</a>
+        <p class="catatan-metode" style="text-align:left">
+          Tanggal menurut hisab Umm al-Qura. Awal Ramadan resmi di Indonesia ditetapkan
+          lewat sidang isbat Kementerian Agama dan dapat berbeda satu hari.
+        </p>
+      </div>
+    </section>
+
+    <section class="bagian">
+      <h2 class="tengah">Perkakas HijriahKu</h2>
+      <div class="grid-alat">
+        {alat.map((a) => (
+          <a href={u(a.href)}>
+            <div class="kartu">
+              <p class="ikon-bintang" aria-hidden="true">✦</p>
+              <h3>{a.judul}</h3>
+              <p>{a.isi}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <EdBeranda />
+  </div>
+
+  <script>
+    import { gKeH, formatH, formatGLengkap, dariISO, berikutnyaH, selisihHari, hariIniLokal, tambahHari } from '../lib/hijri.js';
+
+    const ini = hariIniLokal();
+    document.getElementById('hari-ini-h').textContent = formatH(gKeH(ini));
+    document.getElementById('hari-ini-g').textContent = formatGLengkap(ini);
+
+    // Konversi cepat Masehi → Hijriah
+    const form = document.getElementById('cepat-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = document.getElementById('cepat-tanggal').value;
+      if (!v) return;
+      const g = dariISO(v);
+      const h = gKeH(g);
+      document.getElementById('cepat-utama').textContent = formatH(h);
+      document.getElementById('cepat-rinci').textContent = formatGLengkap(g);
+      document.getElementById('cepat-hasil').hidden = false;
+    });
+
+    // Hitung mundur Ramadan
+    const target = berikutnyaH(1, 9, ini);
+    document.getElementById('sisa-ramadan-tglh').textContent = '1 Ramadan ' + gKeH(target).y + ' H';
+    document.getElementById('sisa-ramadan-tglg').textContent = formatGLengkap(target);
+    function segarkan() {
+      const now = new Date();
+      const akhirHariIni = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      const sasaran = new Date(target.y, target.m - 1, target.d);
+      let ms = sasaran - now;
+      if (ms < 0) ms = 0;
+      const hari = Math.floor(ms / 86400000);
+      const sisa = ms - hari * 86400000;
+      const jam = Math.floor(sisa / 3600000);
+      const menit = Math.floor((sisa - jam * 3600000) / 60000);
+      const detik = Math.floor((sisa - jam * 3600000 - menit * 60000) / 1000);
+      document.getElementById('sisa-ramadan-hari').textContent = hari + ' hari lagi';
+      document.getElementById('sisa-ramadan-jam').textContent =
+        String(jam).padStart(2, '0') + ':' + String(menit).padStart(2, '0') + ':' + String(detik).padStart(2, '0');
+    }
+    segarkan();
+    setInterval(segarkan, 1000);
+  </script>
+</Utama>

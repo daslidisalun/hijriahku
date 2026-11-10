@@ -1,0 +1,355 @@
+/* HijriahKu — "manuskrip & geometri": zamrud tua + emas di atas gading hangat.
+   Panel lengkung mihrab, pola bintang segi delapan, tipografi serif elegan. */
+:root {
+  --latar: #faf6ec;
+  --panel: #fffdf6;
+  --zamrud: #0b5563;
+  --zamrud-tua: #07333b;
+  --zamrud-lembut: #e3efec;
+  --emas: #c9a227;
+  --emas-terang: #e7ce7a;
+  --tinta: #21302b;
+  --tinta-lembut: #5d6f66;
+  --garis: #e0d5b8;
+  --header-h: 186px;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-padding-top: calc(var(--header-h) + 10px);
+}
+
+body {
+  margin: 0;
+  background: var(--latar);
+  color: var(--tinta);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16.5px;
+  line-height: 1.65;
+}
+
+h1, h2, h3, .serif {
+  font-family: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--zamrud-tua);
+}
+h1 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); margin: 0.2em 0 0.35em; }
+h2 { font-size: clamp(1.45rem, 3.2vw, 2rem); margin: 1.4em 0 0.5em; }
+h3 { font-size: 1.22rem; margin: 1.2em 0 0.4em; }
+p { margin: 0.55em 0; }
+a { color: var(--zamrud); }
+.arab { font-family: 'Amiri', serif; }
+
+.bungkus { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- header ---------- */
+.pita-pola {
+  height: 12px;
+  background-color: var(--zamrud-tua);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='12' viewBox='0 0 36 12'%3E%3Cg fill='none' stroke='%23c9a227' stroke-opacity='0.55' stroke-width='0.8'%3E%3Crect x='13' y='1' width='10' height='10'/%3E%3Crect x='13' y='1' width='10' height='10' transform='rotate(45 18 6)'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--latar);
+  border-bottom: 1px solid var(--garis);
+}
+.header-dalam { text-align: center; padding: 12px 20px 0; }
+.merek {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: 1.85rem;
+  letter-spacing: 0.04em;
+  color: var(--zamrud-tua);
+  text-decoration: none;
+}
+.merek em { font-style: normal; color: var(--emas); }
+.tagline-mini { margin: 0; font-size: 0.82rem; color: var(--tinta-lembut); letter-spacing: 0.06em; }
+.ornamen { color: var(--emas); font-size: 0.8rem; letter-spacing: 0.5em; margin: 2px 0 0; }
+.nav-bungkus { display: flex; justify-content: center; align-items: center; }
+.nav-tautan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 4px;
+  padding: 8px 0 12px;
+}
+.nav-tautan a {
+  text-decoration: none;
+  color: var(--tinta);
+  font-size: 0.94rem;
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+.nav-tautan a:hover { background: var(--zamrud-lembut); color: var(--zamrud-tua); }
+.tombol-menu {
+  display: none;
+  margin: 8px auto 10px;
+  background: var(--zamrud);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+@media (max-width: 920px) {
+  .tombol-menu { display: block; }
+  .nav-tautan { display: none; flex-direction: column; align-items: stretch; padding: 0 0 12px; }
+  .nav-tautan.buka { display: flex; }
+  .nav-tautan a { text-align: center; padding: 9px; }
+}
+
+/* ---------- panel lengkung mihrab ---------- */
+.lengkung {
+  background: var(--panel);
+  border: 1.5px solid var(--emas);
+  border-radius: 170px 170px var(--radius) var(--radius);
+  box-shadow: 0 0 0 5px var(--panel), 0 0 0 6.5px var(--garis), 0 18px 40px rgba(7, 51, 59, 0.08);
+  padding: 44px 34px 30px;
+  text-align: center;
+}
+.lengkung-kecil {
+  background: var(--panel);
+  border: 1.5px solid var(--garis);
+  border-radius: 64px 64px var(--radius) var(--radius);
+  padding: 30px 26px 24px;
+}
+.kartu {
+  background: var(--panel);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+.kartu h3 { margin-top: 0; }
+
+/* ---------- beranda ---------- */
+.pahlawan { padding: 42px 0 10px; }
+.tanggal-besar {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  color: var(--zamrud-tua);
+  line-height: 1.15;
+  margin: 6px 0 2px;
+}
+.tanggal-masehi { color: var(--tinta-lembut); margin: 0; }
+.label-kecil {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.74rem;
+  color: var(--emas);
+  font-weight: 600;
+  margin: 0;
+}
+.grid-alat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  margin: 26px 0 8px;
+}
+.grid-alat .kartu { text-align: left; }
+.grid-alat a { text-decoration: none; }
+.grid-alat .kartu:hover { border-color: var(--emas); }
+.ikon-bintang { color: var(--emas); font-size: 1.15rem; }
+
+/* ---------- formulir & tombol ---------- */
+label { display: block; font-size: 0.9rem; font-weight: 600; margin: 12px 0 5px; color: var(--zamrud-tua); }
+input[type='date'], input[type='number'], select {
+  width: 100%;
+  font: inherit;
+  padding: 10px 12px;
+  border: 1.5px solid var(--garis);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--tinta);
+}
+input:focus, select:focus { outline: 2px solid var(--emas-terang); border-color: var(--emas); }
+.tombol {
+  display: inline-block;
+  background: var(--zamrud);
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 26px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 14px;
+}
+.tombol:hover { background: var(--zamrud-tua); }
+.tombol-emas { background: var(--emas); color: var(--zamrud-tua); }
+.tombol-emas:hover { background: var(--emas-terang); }
+.hasil {
+  margin-top: 20px;
+  background: var(--zamrud-lembut);
+  border: 1px solid var(--garis);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+.hasil .utama { font-family: 'Marcellus', Georgia, serif; font-size: 1.5rem; color: var(--zamrud-tua); }
+.catatan-metode {
+  font-size: 0.86rem;
+  color: var(--tinta-lembut);
+  border-left: 3px solid var(--emas);
+  padding: 6px 0 6px 12px;
+  margin: 18px 0;
+}
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+@media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+
+/* ---------- hitung mundur ---------- */
+.grid-mundur {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+.mundur { text-align: center; }
+.mundur .sisa {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: 2rem;
+  color: var(--zamrud);
+  margin: 4px 0 0;
+}
+.mundur .jam { font-variant-numeric: tabular-nums; color: var(--tinta-lembut); font-size: 0.95rem; margin: 0; }
+.mundur .tgl { margin: 2px 0; }
+.mundur .tgl-h { font-weight: 600; color: var(--zamrud-tua); margin-bottom: 0; }
+
+/* ---------- tasbih ---------- */
+.tasbih-bungkus { text-align: center; }
+.cincin-bungkus { position: relative; width: 250px; height: 250px; margin: 18px auto; }
+.cincin-bungkus svg { transform: rotate(-90deg); }
+.tombol-tasbih {
+  position: absolute;
+  inset: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--emas);
+  background: radial-gradient(circle at 50% 35%, #11707f, var(--zamrud) 60%, var(--zamrud-tua));
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 18px;
+}
+.tombol-tasbih:active { transform: scale(0.985); }
+.tombol-tasbih .dzikir-arab { font-family: 'Amiri', serif; font-size: 1.65rem; line-height: 1.5; }
+.tombol-tasbih .dzikir-latin { font-size: 0.95rem; font-weight: 600; }
+.angka-tasbih { font-family: 'Marcellus', Georgia, serif; font-size: 2.2rem; color: var(--zamrud-tua); }
+.pil-dzikir { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 10px 0; }
+.pil-dzikir button {
+  font: inherit; font-size: 0.9rem; cursor: pointer;
+  border: 1.5px solid var(--garis); background: #fff; color: var(--tinta);
+  border-radius: 999px; padding: 7px 15px;
+}
+.pil-dzikir button.aktif { background: var(--zamrud); color: #fff; border-color: var(--zamrud); }
+.pil-target { display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+.pil-target button {
+  font: inherit; cursor: pointer; border: 1.5px solid var(--garis);
+  background: #fff; border-radius: 10px; padding: 6px 14px;
+}
+.pil-target button.aktif { background: var(--emas); border-color: var(--emas); color: var(--zamrud-tua); font-weight: 700; }
+.pil-target input { width: 110px; }
+
+/* ---------- kalender hijriah ---------- */
+.kal-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 14px 0; }
+.kal-nav .judul-bulan { font-family: 'Marcellus', Georgia, serif; font-size: 1.5rem; color: var(--zamrud-tua); text-align: center; }
+.kal-nav button {
+  font: inherit; cursor: pointer; background: var(--panel);
+  border: 1.5px solid var(--garis); border-radius: 999px; padding: 7px 16px;
+}
+.kal-nav button:hover { border-color: var(--emas); }
+.tabel-kal { width: 100%; border-collapse: separate; border-spacing: 4px; }
+.tabel-kal th {
+  font-size: 0.8rem; letter-spacing: 0.08em; color: var(--tinta-lembut);
+  text-transform: uppercase; font-weight: 600; padding: 4px 0;
+}
+.tabel-kal td {
+  background: var(--panel);
+  border: 1px solid var(--garis);
+  border-radius: 12px;
+  text-align: center;
+  padding: 8px 2px 6px;
+  width: 14.28%;
+  vertical-align: top;
+}
+.tabel-kal td.kosong { background: transparent; border-color: transparent; }
+.tabel-kal td.hari-ini { border-color: var(--emas); background: #fdf6dd; box-shadow: inset 0 0 0 1.5px var(--emas); }
+.tabel-kal .dh { display: block; font-family: 'Marcellus', Georgia, serif; font-size: 1.3rem; color: var(--zamrud-tua); line-height: 1.1; }
+.tabel-kal .dg { display: block; font-size: 0.72rem; color: var(--tinta-lembut); }
+.daftar-bulan { columns: 2; column-gap: 34px; }
+@media (max-width: 640px) { .daftar-bulan { columns: 1; } }
+.daftar-bulan li { break-inside: avoid; margin-bottom: 8px; }
+
+/* ---------- hari besar ---------- */
+.item-besar {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 4px 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--garis);
+}
+.item-besar .kapan { text-align: right; }
+.item-besar .kapan .h { font-family: 'Marcellus', Georgia, serif; color: var(--zamrud-tua); font-size: 1.12rem; display: block; }
+.item-besar .kapan .g { color: var(--tinta-lembut); font-size: 0.88rem; display: block; }
+.lencana {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+  border-radius: 999px; padding: 2px 10px; margin-top: 5px; text-transform: uppercase;
+}
+.lencana.lewat { background: #eee7d2; color: var(--tinta-lembut); }
+.lencana.berikutnya { background: var(--emas); color: var(--zamrud-tua); }
+.lencana.sekarang { background: var(--zamrud); color: #fff; }
+.item-besar h3 { margin: 0; }
+.item-besar p { margin: 2px 0 0; color: var(--tinta); }
+@media (max-width: 640px) {
+  .item-besar { grid-template-columns: 1fr; }
+  .item-besar .kapan { text-align: left; }
+}
+
+/* ---------- editorial & artikel ---------- */
+.ed { max-width: 780px; margin: 10px auto 0; }
+.ed table, .tabel-data { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.95rem; }
+@media (max-width: 700px) {
+  .ed table, .tabel-data { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+.ed th, .ed td, .tabel-data th, .tabel-data td { border: 1px solid var(--garis); padding: 8px 11px; text-align: left; vertical-align: top; }
+.ed th, .tabel-data th { background: var(--zamrud-lembut); color: var(--zamrud-tua); }
+.ed blockquote { border-left: 3px solid var(--emas); margin: 14px 0; padding: 4px 0 4px 14px; color: var(--tinta-lembut); }
+.artikel-kepala { text-align: center; padding: 36px 0 4px; }
+.artikel-kepala .tanggal { color: var(--tinta-lembut); font-size: 0.9rem; letter-spacing: 0.05em; }
+.daftar-artikel { display: grid; gap: 16px; margin: 22px 0; }
+.daftar-artikel .kartu a { text-decoration: none; }
+.daftar-artikel h3 { margin: 0 0 4px; }
+.daftar-artikel .tgl { color: var(--tinta-lembut); font-size: 0.86rem; margin: 0; }
+.daftar-artikel p { margin: 4px 0 0; }
+
+/* ---------- footer ---------- */
+.site-footer {
+  margin-top: 56px;
+  background: var(--zamrud-tua);
+  color: #dcebe6;
+}
+.site-footer a { color: var(--emas-terang); text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-dalam { padding: 34px 20px 26px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 26px; }
+@media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-merek { font-family: 'Marcellus', Georgia, serif; font-size: 1.4rem; color: #fff; margin: 0 0 6px; }
+.footer-judul { color: var(--emas-terang); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 8px; }
+.site-footer nav a { display: block; padding: 3px 0; }
+.footer-bawah { border-top: 1px solid rgba(201, 162, 39, 0.35); margin-top: 22px; padding-top: 14px; font-size: 0.86rem; color: #b9cec6; }
+
+main { display: block; }
+.bagian { padding: 18px 0 6px; }
+.tengah { text-align: center; }
+.sempit { max-width: 780px; margin: 0 auto; }

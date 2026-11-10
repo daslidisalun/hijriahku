@@ -1,0 +1,63 @@
+---
+import Artikel from '../../layouts/Artikel.astro';
+import { u } from '../../lib/base.js';
+
+const meta = {
+  judul: 'Cara Konversi Tanggal Hijriah ke Masehi (dan Sebaliknya)',
+  deskripsi: 'Mengapa konversi Hijriah–Masehi tidak bisa sekadar ditambah-kurang, bagaimana kalender Umm al-Qura menghitungnya, dan contoh konversi langkah demi langkah yang terverifikasi.',
+  tanggal: '2026-11-08',
+  tanggalTampil: '8 November 2026',
+  slug: 'cara-konversi-tanggal-hijriah',
+};
+---
+<Artikel {...meta}>
+  <p>Kebutuhan mengubah tanggal Hijriah menjadi Masehi — atau sebaliknya — muncul dalam banyak situasi sehari-hari: mengetahui tanggal lahir versi Hijriah, membaca tanggal pada naskah atau prasasti lama, mengurus dokumen keagamaan, menyiapkan acara berdasarkan penanggalan Hijriah, atau sekadar penasaran Ramadan tahun depan jatuh pada bulan apa. Sekilas, konversi ini tampak seperti soal tambah-kurang biasa. Kenyataannya, konversi Hijriah–Masehi termasuk konversi kalender yang paling mudah meleset satu hari jika dilakukan sembarangan.</p>
+  <p>Artikel ini menjelaskan mengapa konversi tersebut tidak bisa dilakukan dengan rumus sederhana, bagaimana mesin kalender modern — termasuk yang dipakai situs ini — menghitungnya, serta contoh-contoh konversi nyata yang telah dicocokkan dengan ketetapan resmi pemerintah Indonesia. Di bagian akhir, terdapat tabel jujur tentang selisih satu hari yang kadang muncul antara hasil hisab dan tanggal resmi, agar Anda tahu kapan hasil konversi dapat dipakai langsung dan kapan perlu menunggu pengumuman resmi.</p>
+
+  <h2>Mengapa Tidak Bisa Sekadar Tambah-Kurang?</h2>
+  <p>Akar kesulitannya ada pada perbedaan fondasi kedua kalender. Kalender Masehi adalah kalender matahari: satu tahunnya 365 hari, atau 366 hari pada tahun kabisat, mengikuti peredaran bumi mengelilingi matahari. Kalender Hijriah adalah kalender bulan: satu tahunnya 354 hari, atau 355 hari pada tahun kabisatnya, tersusun dari dua belas bulan yang masing-masing berumur 29 atau 30 hari mengikuti fase bulan.</p>
+  <p>Akibat selisih sekitar 11 hari per tahun itu, hubungan antara kedua kalender terus bergerak. Tanggal 1 Muharam 1448 jatuh pada 16 Juni 2026, tetapi 1 Muharam 1449 jatuh pada 6 Juni 2027 — lebih awal sepuluh hari. Sebuah tanggal Hijriah tidak memiliki padanan Masehi yang tetap; padanannya bergantung pada tahunnya. Dalam jangka panjang, tanggal Hijriah berputar melewati seluruh bulan Masehi dalam siklus kurang lebih 33 tahun, sehingga rumus tetap seperti “tambah sekian hari” pasti gagal.</p>
+  <p>Kesulitan kedua ada di dalam satu tahun Hijriah itu sendiri. Panjang setiap bulan tidak berpola selang-seling yang kaku seperti kesan yang sering beredar; bulan berumur 29 atau 30 hari ditentukan oleh perhitungan kalender yang dipakai, dan tahun kabisat Hijriah — tahun yang berjumlah 355 hari — muncul 11 kali dalam siklus 30 tahun menurut kalender Hijriah tabular. Menghitung manual hari demi hari dari satu titik acuan memang mungkin, tetapi sangat rentan salah, apalagi untuk jarak ratusan tahun.</p>
+  <p>Sebagai gambaran kasar, ada rumus pendekatan untuk memperkirakan tahun saja: tahun Masehi kurang lebih sama dengan tahun Hijriah dikurangi tiga persennya lalu ditambah 622. Misalnya 1448 dikurangi sekitar 43 menghasilkan 1405, ditambah 622 menjadi 2027 — kisaran yang masuk akal karena tahun 1448 Hijriah memang membentang dari Juni 2026 hingga Juni 2027. Namun rumus semacam ini hanya memberi perkiraan tahun, bukan tanggal, dan tidak layak dipakai untuk menentukan hari penting.</p>
+
+  <h2>Bagaimana Mesin Kalender Menghitungnya?</h2>
+  <p>Komputer tidak menghitung tanggal Hijriah dengan menebak-nebak panjang bulan. Peramban modern menyediakan sistem kalender internasional melalui fitur Intl, dan untuk penanggalan Islam tersedia antara lain kalender Umm al-Qura — kalender hisab resmi yang dipakai Arab Saudi dan dinamai menurut wilayah Umm al-Qura di Makkah. Kalender ini memiliki tabel perhitungan posisi bulan yang telah dihitung bertahun-tahun ke depan, sehingga konversi dapat dilakukan secara konsisten: setiap tanggal Masehi dipetakan ke tanggal Hijriahnya, dan sebaliknya, berdasarkan tabel hisab yang sama.</p>
+  <p>Itulah mesin yang dipakai HijriahKu. Ketika Anda memasukkan tanggal pada <a href={u('/konverter/')}>konverter</a>, peramban Anda mencocokkan tanggal tersebut dengan kalender Umm al-Qura dan menampilkan padanannya. Keunggulannya adalah konsistensi dan kecepatan: hasil yang sama akan muncul di perangkat mana pun yang memakai standar yang sama. Keterbatasannya perlu dipahami juga: Umm al-Qura adalah satu sistem hisab tertentu, sedangkan tanggal resmi hari besar Islam di Indonesia ditetapkan pemerintah melalui sidang isbat dengan kriteria dan pengamatan rukyat, sehingga pada bulan-bulan tertentu hasilnya dapat berbeda satu hari — dibahas jujur pada bagian akhir artikel ini.</p>
+
+  <h2>Contoh Konversi yang Terverifikasi</h2>
+  <p>Cara terbaik memahami konversi adalah melihat contoh nyata yang jangkarnya jelas. Contoh-contoh berikut adalah tanggal-tanggal yang hasil konversi mesin situs ini cocok persis dengan Surat Keputusan Bersama 3 Menteri — SKB 2026 bernomor 1497/2025, 2/2025, dan 5/2025, serta SKB 2027 bernomor 1205/2026, 3/2026, dan 2/2026 — sehingga dapat Anda jadikan patokan untuk memeriksa hasil konversi Anda sendiri.</p>
+  <table>
+    <thead>
+      <tr><th>Tanggal Masehi</th><th>Tanggal Hijriah</th><th>Keterangan</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>16 Januari 2026</td><td>27 Rajab 1447</td><td>Isra Mikraj</td></tr>
+      <tr><td>27 Mei 2026</td><td>10 Dzulhijah 1447</td><td>Idul Adha</td></tr>
+      <tr><td>16 Juni 2026</td><td>1 Muharam 1448</td><td>Tahun Baru Hijriah</td></tr>
+      <tr><td>25 Agustus 2026</td><td>12 Rabiulawal 1448</td><td>Maulid Nabi</td></tr>
+      <tr><td>6 Juni 2027</td><td>1 Muharam 1449</td><td>Tahun Baru Hijriah</td></tr>
+    </tbody>
+  </table>
+  <p>Perhatikan contoh ketiga dan kelima sebagai sebuah rangkaian langkah. Jika Anda ingin mengetahui kapan Tahun Baru Hijriah berikutnya setelah 16 Juni 2026, jangan menambahkan 365 hari. Tambahkan panjang satu tahun Hijriah: tahun 1448 menurut hisab berjumlah 355 hari, sehingga 1 Muharam 1449 jatuh 355 hari setelah 16 Juni 2026, yaitu 6 Juni 2027 — dan hasil hitungan kasar itu cocok dengan tanggal resmi dalam SKB. Contoh ini memperlihatkan sekaligus dua hal: konversi pada dasarnya adalah soal menghitung hari dengan panjang tahun yang benar, dan pergeseran sekitar 11 hari setahun bukanlah teori, melainkan terlihat langsung dari 16 Juni menjadi 6 Juni.</p>
+  <p>Contoh arah sebaliknya juga mudah diperiksa. Misalkan Anda membaca dokumen lama bertanggal 12 Rabiulawal 1448 dan ingin tahu padanan Masehinya. Masukkan tanggal Hijriah itu ke konverter, dan hasilnya adalah 25 Agustus 2026 — tanggal yang sama dengan peringatan Maulid Nabi dalam kalender resmi, karena Maulid memang diperingati setiap 12 Rabiulawal. Dengan cara yang sama, tanggal lahir Hijriah orang tua atau tanggal pada buku nikah lama dapat diterjemahkan ke Masehi dalam hitungan detik.</p>
+  <p>Satu contoh ke depan: menurut hisab Umm al-Qura, 1 Ramadan 1448 berpadanan dengan 8 Februari 2027. Ini adalah contoh konversi murni hasil perhitungan — berguna untuk perencanaan awal, misalnya memperkirakan jadwal kerja atau perjalanan — tetapi untuk penetapan ibadah, tanggal resminya tetap menunggu sidang isbat, sebagaimana dijelaskan dalam <a href={u('/blog/kenapa-awal-ramadan-bisa-berbeda/')}>artikel tentang hisab dan rukyat</a>.</p>
+
+  <h2>Tabel Jujur: Kapan Mesin Berbeda Satu Hari dari Tanggal Resmi</h2>
+  <p>Transparansi penting dalam urusan tanggal ibadah. Pada sebagian besar tanggal, hasil konversi Umm al-Qura cocok dengan tanggal resmi Indonesia, seperti lima contoh di atas. Namun ada bulan-bulan tertentu — terutama Ramadan, Syawal, dan Dzulhijah, yang penetapannya di Indonesia mempertimbangkan rukyatul hilal dan kriteria imkan rukyat MABIMS dengan tinggi hilal minimal 3 derajat dan elongasi minimal 6,4 derajat — ketika hasil hisab mesin berjalan satu hari lebih awal daripada ketetapan resmi. Berikut contoh nyatanya:</p>
+  <table>
+    <thead>
+      <tr><th>Peristiwa</th><th>Tanggal Resmi Indonesia</th><th>Hasil Mesin (Umm al-Qura)</th><th>Selisih</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1 Syawal 1447 (Idul Fitri)</td><td>21 Maret 2026</td><td>20 Maret 2026</td><td>Mesin 1 hari lebih awal</td></tr>
+      <tr><td>1 Syawal 1448 (Idul Fitri)</td><td>10 Maret 2027</td><td>9 Maret 2027</td><td>Mesin 1 hari lebih awal</td></tr>
+      <tr><td>10 Dzulhijah 1448 (Idul Adha)</td><td>17 Mei 2027</td><td>16 Mei 2027</td><td>Mesin 1 hari lebih awal</td></tr>
+    </tbody>
+  </table>
+  <p>Selisih ini bukan kesalahan mesin dan bukan pula kesalahan ketetapan resmi; keduanya adalah keluaran dua metode yang berbeda, persis seperti yang dibahas pada artikel awal Ramadan. Kesimpulan praktisnya sederhana. Untuk keperluan umum — mengetahui bulan Hijriah hari ini, mengonversi tanggal lahir, membaca dokumen, merencanakan acara keluarga — hasil konverter dapat dipakai dengan tenang. Untuk tanggal-tanggal ibadah yang ditetapkan pemerintah, yaitu 1 Ramadan, Idul Fitri, dan Idul Adha, keputusan akhir di Indonesia mengikuti Keputusan Menteri Agama melalui sidang isbat; SKB 3 Menteri pun secara eksplisit mencatat hal tersebut. Situs ini menampilkan tanggal dengan label perkiraan hisab untuk ketiga peristiwa itu dan menyarankan Anda memeriksa pengumuman resmi menjelang harinya.</p>
+
+  <h2>Langkah Menggunakan Konverter</h2>
+  <p>Mengonversi tanggal di HijriahKu hanya memerlukan tiga langkah. Pertama, buka halaman <a href={u('/konverter/')}>konverter tanggal</a> dan pilih arah konversi: dari Masehi ke Hijriah atau dari Hijriah ke Masehi. Kedua, masukkan tanggal yang ingin diubah — ketik tahun, bulan, dan tanggalnya dengan teliti, karena kesalahan satu angka pada tahun adalah sumber kekeliruan yang paling sering terjadi. Ketiga, baca hasilnya dan, bila tanggal itu berkaitan dengan hari besar, cocokkan dengan daftar <a href={u('/hari-besar/')}>hari besar Islam</a> atau kalender resmi tahun berjalan.</p>
+  <p>Beberapa tips tambahan agar hasil konversi Anda akurat. Untuk tanggal yang sangat lama, ingatlah bahwa titik awal era Hijriah adalah 1 Muharam 1 H yang bertepatan dengan 16 Juli 622 M menurut kalender Julian, sehingga konversi untuk abad-abad awal perlu memperhatikan perbedaan kalender Julian dan Gregorian. Untuk keperluan sehari-hari modern, hal itu tidak menjadi masalah. Perhatikan pula bahwa hari Hijriah secara tradisional dimulai sejak matahari terbenam; konverter sipil seperti situs ini memakai batas hari tengah malam sebagaimana kalender pada umumnya, sehingga untuk peristiwa yang terjadi pada malam hari di sekitar pergantian tanggal, perbedaan batas hari ini layak diingat.</p>
+  <p>Silakan coba sekarang: masukkan tanggal lahir Anda di <a href={u('/konverter/')}>konverter HijriahKu</a> dan lihat padanan Hijriahnya, lalu telusuri bulan berjalan di <a href={u('/kalender-hijriah/')}>kalender Hijriah</a> atau hitung jarak menuju hari besar berikutnya dengan <a href={u('/hitung-mundur/')}>hitung mundur</a>. Dengan memahami cara mesin menghitungnya — termasuk batas selisih satu harinya — Anda dapat memakai hasil konversi dengan tepat dan percaya diri.</p>
+</Artikel>

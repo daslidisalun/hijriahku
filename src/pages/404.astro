@@ -1,0 +1,18 @@
+---
+import Utama from '../layouts/Utama.astro';
+import { u } from '../lib/base.js';
+---
+<Utama title="Halaman Tidak Ditemukan — HijriahKu" description="Halaman yang Anda cari tidak ditemukan di HijriahKu.">
+  <div class="bungkus bagian tengah">
+    <p class="ornamen" aria-hidden="true" style="font-size:1.4rem">✦</p>
+    <h1>404 — Halaman Tidak Ditemukan</h1>
+    <p class="sempit">
+      Alamat yang Anda tuju tidak ada di situs ini. Mungkin tautannya sudah berubah
+      atau ada kesalahan ketik. Silakan kembali ke beranda atau buka konverter tanggal.
+    </p>
+    <p>
+      <a class="tombol" href={u('/')}>Ke Beranda</a>
+      <a class="tombol tombol-emas" href={u('/konverter/')}>Ke Konverter</a>
+    </p>
+  </div>
+</Utama>

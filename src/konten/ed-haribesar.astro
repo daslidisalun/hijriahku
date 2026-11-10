@@ -1,0 +1,141 @@
+---
+import { u } from '../lib/base.js';
+---
+<section class="ed">
+  <p>
+    Halaman ini merangkum hari-hari besar dan peringatan penting dalam kalender Hijriah untuk tahun
+    1447 dan 1448 Hijriah, lengkap dengan padanan tanggal Masehinya. Daftar ini disusun agar Anda bisa
+    merencanakan kegiatan jauh-jauh hari: menyiapkan cuti, menjadwalkan acara keluarga atau komunitas,
+    mengatur perjalanan, sampai sekadar mengetahui kapan sebuah peringatan akan tiba. Setiap entri
+    dilengkapi keterangan singkat mengenai latar belakang peringatannya dan statusnya terhadap hari
+    ini, sehingga Anda tidak perlu menghitung selisih tanggal secara manual. Untuk perencanaan yang
+    lebih rinci, setiap peringatan juga terhubung dengan perkakas lain di situs ini, misalnya
+    <a href={u('/hitung-mundur/')}>hitung mundur</a> yang menunjukkan sisa hari secara persis dan
+    <a href={u('/kalender-hijriah/')}>kalender Hijriah</a> yang menampilkan letak tanggal tersebut
+    dalam susunan satu bulan penuh.
+  </p>
+
+  <h2>Apa Saja yang Masuk Daftar Ini</h2>
+  <p>
+    Dasar pemilihan daftar ini sederhana dan dapat diperiksa siapa pun: yang dimasukkan adalah
+    peringatan yang tercantum dalam kalender Hijriah yang beredar dan digunakan di Indonesia, serta
+    peringatan yang secara umum diperingati oleh masyarakat Muslim di berbagai daerah. Dengan dasar
+    itu, daftar ini mencakup antara lain Tahun Baru Hijriah pada 1 Muharam, peringatan Maulid Nabi
+    Muhammad pada 12 Rabiulawal, Isra Mikraj pada 27 Rajab, hari-hari di bulan Ramadan termasuk awal
+    puasa dan rentang sepuluh malam terakhir, Idul Fitri pada 1 Syawal, hari Arafah pada 9 Dzulhijah,
+    serta Idul Adha pada 10 Dzulhijah. Di luar itu terdapat pula peringatan yang kedudukannya berbeda:
+    sebagian ditetapkan sebagai hari libur nasional melalui keputusan pemerintah, sebagian tidak
+    berstatus libur tetapi tetap diperingati secara luas, dan sebagian lagi lebih bersifat penanda
+    awal bulan penting, seperti 1 Ramadan dan 1 Dzulhijah, yang menjadi acuan bagi rangkaian ibadah
+    pada bulan tersebut.
+  </p>
+  <p>
+    Karena dasar pemilihannya adalah kalender yang umum digunakan, daftar ini tidak dimaksudkan
+    sebagai daftar resmi pemerintah dan tidak pula sebagai ketetapan keagamaan. Status libur nasional
+    mengikuti keputusan bersama menteri yang diterbitkan pemerintah setiap tahun, dan dapat berubah
+    apabila pemerintah menetapkan penyesuaian. Apabila Anda membutuhkan kepastian mengenai status
+    libur untuk keperluan pekerjaan, sekolah, atau administrasi, rujukan yang berlaku tetap pengumuman
+    resmi pemerintah. Daftar di halaman ini berfungsi sebagai alat bantu penanggalan: ia menunjukkan
+    kapan sebuah tanggal Hijriah jatuh dalam kalender Masehi menurut metode hitung yang dipakai situs
+    ini, lengkap dengan penjelasan metodenya di bawah ini.
+  </p>
+
+  <h2>Bagaimana Tanggal pada Daftar Ini Dihitung</h2>
+  <p>
+    Seluruh tanggal pada daftar ini dihitung dengan mesin kalender yang sama dengan perkakas lain di
+    HijriahKu, yaitu hisab kalender Umm al-Qura yang dijalankan melalui fasilitas Intl bawaan
+    peramban. Perhitungannya berlangsung langsung di perangkat Anda, tanpa server dan tanpa memanggil
+    layanan dari luar, sehingga hasilnya konsisten dengan keluaran
+    <a href={u('/konverter/')}>konverter tanggal</a> untuk tanggal yang sama. Kalender Umm al-Qura
+    adalah kalender hisab aritmetik: awal setiap bulan ditentukan dengan kaidah hitung yang tetap
+    berdasarkan posisi bulan yang dihitung secara astronomis, bukan berdasarkan pengamatan hilal
+    pada suatu tempat tertentu. Karena kaidahnya tetap, tanggal untuk tahun-tahun mendatang pun dapat
+    dihitung sekarang dengan hasil yang sama setiap kali dihitung ulang.
+  </p>
+  <p>
+    Konsekuensi dari metode tersebut perlu dipahami sejak awal. Tanggal resmi awal Ramadan, Idul
+    Fitri, dan Idul Adha di Indonesia tidak ditetapkan dengan hisab aritmetik semata, melainkan
+    melalui sidang isbat Kementerian Agama yang menggabungkan hisab dengan rukyatul hilal dan
+    istikmal. Karena itu, untuk ketiga momen tersebut tanggal versi mesin dapat berbeda satu hari
+    dari ketetapan resmi. HijriahKu tidak mengubah hasil mesin agar tampak selalu sama dengan
+    ketetapan resmi; perbedaan yang diketahui justru ditulis terbuka, termasuk pada halaman
+    <a href={u('/tentang/')}>Tentang &amp; Metode</a> yang memuat tabel perbandingan tanggal mesin
+    terhadap keputusan resmi pemerintah. Label metode yang berlaku untuk seluruh situs adalah
+    sebagai berikut: Tanggal Hijriah di situs ini mengikuti hisab kalender Umm al-Qura. Tanggal
+    resmi awal Ramadan, Idul Fitri, dan Idul Adha di Indonesia ditetapkan lewat sidang isbat
+    Kementerian Agama dan dapat berbeda satu hari.
+  </p>
+
+  <h2>Arti Status Sudah Lewat dan Berikutnya</h2>
+  <p>
+    Setiap entri pada daftar diberi status relatif terhadap tanggal hari ini pada perangkat Anda.
+    Peringatan yang tanggalnya telah berlalu ditandai sebagai sudah lewat, sedangkan peringatan
+    terdekat yang belum tiba ditonjolkan sebagai peringatan berikutnya, lengkap dengan jumlah hari
+    yang tersisa. Penandaan ini dihitung ulang setiap kali halaman dibuka, sehingga selalu mengikuti
+    hari berjalan tanpa perlu pembaruan manual dari pengelola. Perlu dicatat bahwa status tersebut
+    sepenuhnya soal urutan tanggal: status berikutnya berarti peringatan itu adalah yang paling dekat
+    dari hari ini, bukan penilaian mengenai mana peringatan yang paling penting. Begitu sebuah
+    peringatan terlewati, penanda berikutnya otomatis berpindah ke peringatan sesudahnya, dan daftar
+    berlanjut ke tahun Hijriah berikutnya agar halaman ini tidak pernah kosong.
+  </p>
+
+  <h2>Lailatul Qadar Ditampilkan sebagai Rentang Tanggal</h2>
+  <p>
+    Satu entri pada daftar ini diperlakukan berbeda dari yang lain, yaitu Lailatul Qadar. Dalam
+    Al-Quran, Lailatul Qadar digambarkan sebagai malam yang lebih baik dari seribu bulan. Malam ini
+    diyakini jatuh pada sepuluh malam terakhir bulan Ramadan, dan riwayat-riwayat yang beredar
+    menganjurkan untuk mencarinya terutama pada malam-malam ganjil dalam rentang tersebut. Karena
+    tidak ada satu tanggal pun yang dapat dipastikan sebagai malam terjadinya, HijriahKu hanya
+    menampilkan rentang tanggal sepuluh malam terakhir Ramadan, yaitu mulai malam ke-21 sampai akhir
+    bulan, dalam padanan tanggal Masehinya. Kami sengaja tidak menuliskan satu tanggal pasti dan
+    tidak memberi label malam tertentu sebagai Lailatul Qadar, karena penentuan semacam itu berada di
+    luar kemampuan sebuah kalkulator penanggalan. Yang dapat dilakukan situs ini hanyalah menunjukkan
+    rentangnya secara akurat menurut kalender yang dipakai, agar Anda dapat mempersiapkan diri
+    selama rentang malam tersebut.
+  </p>
+
+  <h2>Perbedaan Penekanan Peringatan di Berbagai Daerah</h2>
+  <p>
+    Perlu diketahui pula bahwa penekanan peringatan tidak seragam di semua tempat. Ada daerah dan
+    komunitas yang memperingati Maulid Nabi dengan rangkaian acara besar selama beberapa hari, ada
+    pula yang memperingatinya secara sederhana atau tidak menjadikannya acara khusus. Isra Mikraj di
+    sebagian daerah diisi dengan pengajian dan kegiatan sosial, sementara di tempat lain hari itu
+    berlalu seperti hari libur biasa. Tradisi menyambut Tahun Baru Hijriah, menyambut Ramadan, dan
+    merayakan Idul Fitri pun sangat beragam mengikuti adat setempat. HijriahKu menyajikan daftar ini
+    secara netral: semua peringatan yang memenuhi dasar pemilihan di atas dicantumkan dengan
+    keterangan faktual yang setara, tanpa menilai tradisi mana yang lebih baik, tanpa menganjurkan
+    atau menolak bentuk peringatan tertentu. Penjelasan mengenai latar belakang setiap peringatan
+    ditulis sebatas informasi penanggalan dan pengetahuan umum.
+  </p>
+
+  <h2>Pertanyaan yang Sering Diajukan</h2>
+  <h3>Apakah tanggal pada daftar ini sama dengan tanggal resmi pemerintah?</h3>
+  <p>
+    Untuk sebagian besar peringatan, tanggal mesin Umm al-Qura yang dipakai situs ini sama persis
+    dengan ketetapan resmi. Namun khusus awal Ramadan, Idul Fitri, dan Idul Adha, ketetapan resmi
+    mengikuti hasil sidang isbat dan dapat berbeda satu hari dari hasil mesin. Perbandingan lengkap
+    antara tanggal mesin dan tanggal resmi untuk tahun 2026 dan 2027 dapat dilihat pada tabel jangkar
+    di halaman <a href={u('/tentang/')}>Tentang &amp; Metode</a>. Untuk keperluan ibadah dan
+    administrasi, ikutilah selalu pengumuman resmi pemerintah.
+  </p>
+  <h3>Mengapa Lailatul Qadar tidak ditulis sebagai satu tanggal?</h3>
+  <p>
+    Karena tidak ada kepastian mengenai malam yang tepat. Keterangan yang tersedia menyebutkan malam
+    itu berada dalam sepuluh malam terakhir Ramadan, terutama pada malam-malam ganjil. Menuliskan satu
+    tanggal pasti akan memberi kesan pasti pada sesuatu yang memang tidak dipastikan, sehingga situs
+    ini menampilkan rentangnya saja.
+  </p>
+  <h3>Bagaimana cara mengetahui sisa hari menuju sebuah peringatan?</h3>
+  <p>
+    Buka halaman <a href={u('/hitung-mundur/')}>Hitung Mundur</a>. Di sana setiap hari besar
+    ditampilkan dengan jumlah hari tersisa yang dihitung dari tanggal hari ini pada perangkat Anda,
+    sehingga Anda dapat merencanakan persiapan tanpa menghitung manual selisih dua tanggal.
+  </p>
+  <h3>Bolehkah tanggal dari situs ini dipakai untuk dokumen resmi?</h3>
+  <p>
+    Situs ini adalah alat bantu penanggalan untuk keperluan sehari-hari, seperti memperkirakan
+    padanan tanggal lahir atau merencanakan kegiatan. Untuk dokumen resmi, penetapan hari libur, dan
+    keperluan administrasi negara, gunakan selalu kalender dan pengumuman resmi yang diterbitkan
+    pemerintah, karena hanya ketetapan itulah yang mempunyai kekuatan administratif.
+  </p>
+</section>

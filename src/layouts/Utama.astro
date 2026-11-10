@@ -1,0 +1,112 @@
+---
+import { u } from '../lib/base.js';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+// Canonical dibangun dari site + base pada astro.config.mjs (import.meta.env),
+// agar selalu mengikuti alamat terbit.
+const asal = (import.meta.env.SITE ?? '').replace(/\/$/, '');
+const dasar = import.meta.env.BASE_URL.replace(/\/$/, '');
+let jalur = Astro.url.pathname;
+if (jalur === dasar) jalur = '/';
+else if (jalur.startsWith(dasar + '/')) jalur = jalur.slice(dasar.length);
+const canonical = asal + dasar + jalur;
+
+const nav = [
+  ['/', 'Beranda'],
+  ['/konverter/', 'Konverter'],
+  ['/hitung-mundur/', 'Hitung Mundur'],
+  ['/tasbih/', 'Tasbih Digital'],
+  ['/kalender-hijriah/', 'Kalender Hijriah'],
+  ['/hari-besar/', 'Hari Besar'],
+  ['/blog/', 'Blog'],
+  ['/tentang/', 'Tentang'],
+];
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%230b5563' stroke-width='6'%3E%3Crect x='24' y='24' width='52' height='52'/%3E%3Crect x='24' y='24' width='52' height='52' transform='rotate(45 50 50)'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='7' fill='%23c9a227'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="pita-pola" aria-hidden="true"></div>
+      <div class="header-dalam">
+        <a class="merek" href={u('/')}>Hijriah<em>Ku</em></a>
+        <p class="tagline-mini">KALENDER &amp; UTILITAS HIJRIAH UNTUK SEHARI-HARI</p>
+        <p class="ornamen" aria-hidden="true">✦ ✦ ✦</p>
+      </div>
+      <div class="bungkus nav-bungkus">
+        <button class="tombol-menu" id="tombol-menu" aria-expanded="false" aria-controls="nav-utama">☰ Menu</button>
+        <nav class="nav-tautan" id="nav-utama" aria-label="Navigasi utama">
+          {nav.map(([href, label]) => <a href={u(href)}>{label}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="bungkus footer-dalam">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-merek">HijriahKu</p>
+            <p>
+              Konverter tanggal, kalender, hitung mundur hari besar, dan tasbih digital
+              berdasarkan hisab kalender Umm al-Qura — dihitung langsung di browser Anda,
+              tanpa server dan tanpa pendaftaran.
+            </p>
+          </div>
+          <nav aria-label="Perkakas">
+            <p class="footer-judul">Perkakas</p>
+            <a href={u('/konverter/')}>Konverter Hijriah–Masehi</a>
+            <a href={u('/hitung-mundur/')}>Hitung Mundur Hari Besar</a>
+            <a href={u('/tasbih/')}>Tasbih Digital</a>
+            <a href={u('/kalender-hijriah/')}>Kalender Hijriah</a>
+            <a href={u('/hari-besar/')}>Hari Besar Islam</a>
+          </nav>
+          <nav aria-label="Situs">
+            <p class="footer-judul">Situs</p>
+            <a href={u('/blog/')}>Blog</a>
+            <a href={u('/tentang/')}>Tentang &amp; Metode</a>
+            <a href={u('/kontak/')}>Kontak</a>
+            <a href={u('/privasi/')}>Privasi</a>
+            <a href={u('/disclaimer/')}>Disclaimer</a>
+          </nav>
+        </div>
+        <p class="footer-bawah">
+          Tanggal Hijriah di situs ini mengikuti hisab kalender Umm al-Qura. Tanggal resmi
+          awal Ramadan, Idul Fitri, dan Idul Adha di Indonesia ditetapkan lewat sidang isbat
+          Kementerian Agama dan dapat berbeda satu hari.
+        </p>
+        <p class="footer-bawah">© 2026 HijriahKu · hijriahku@gmail.com</p>
+      </div>
+    </footer>
+
+    <script>
+      const tombol = document.getElementById('tombol-menu');
+      const navEl = document.getElementById('nav-utama');
+      tombol?.addEventListener('click', () => {
+        const buka = navEl?.classList.toggle('buka') ?? false;
+        tombol.setAttribute('aria-expanded', String(buka));
+      });
+    </script>
+  </body>
+</html>

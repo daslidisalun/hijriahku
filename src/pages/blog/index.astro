@@ -1,0 +1,75 @@
+---
+import Utama from '../../layouts/Utama.astro';
+import { u } from '../../lib/base.js';
+import { ARTIKEL } from '../../lib/blog.js';
+---
+<Utama
+  title="Blog — HijriahKu"
+  description="Tulisan tentang kalender Hijriah: sejarahnya, cara kerja hisab dan rukyat, penjelasan sidang isbat, arti nama bulan-bulan Hijriah, dan panduan konversi tanggal."
+>
+  <div class="bungkus">
+    <section class="bagian">
+      <div class="ed">
+        <p class="label-kecil tengah">Blog HijriahKu</p>
+        <h1 class="tengah">Memahami Kalender Hijriah</h1>
+        <p>
+          Kalender Hijriah mengatur banyak hal dalam kehidupan sehari-hari umat Islam
+          di Indonesia: kapan puasa dimulai, kapan hari raya dirayakan, kapan tahun
+          baru Islam tiba, sampai tanggal yang tercantum pada ijazah, akta, dan dokumen
+          lama yang masih memakai penanggalan Hijriah. Namun cara kerjanya tidak selalu
+          intuitif — terutama karena kalender ini murni mengikuti peredaran bulan,
+          sehingga tanggal-tanggalnya terus bergeser terhadap kalender Masehi yang
+          berbasis matahari.
+        </p>
+        <p>
+          Blog ini adalah ruang penjelasan HijriahKu. Di sini kami menguraikan sejarah
+          penanggalan Hijriah sejak ditetapkan pada masa Khalifah Umar bin Khattab,
+          arti nama kedua belas bulannya, dan peristiwa penting yang diperingati di
+          setiap bulan. Kami juga menjelaskan dengan bahasa yang netral dan faktual
+          mengapa awal Ramadan kadang berbeda antarorganisasi dan antarnegara:
+          perbedaan itu berakar pada dua pendekatan yang sama-sama tua dan
+          terdokumentasi — hisab (perhitungan astronomis) dan rukyatul hilal
+          (pengamatan bulan sabit) — serta bagaimana negara, melalui sidang isbat
+          Kementerian Agama, mengambil ketetapan resminya.
+        </p>
+        <p>
+          Mulailah dari <a href={u('/blog/sejarah-kalender-hijriah/')}>sejarah kalender
+          Hijriah</a> bila Anda ingin memahami asal-usulnya, lalu lanjutkan ke
+          <a href={u('/blog/mengenal-12-bulan-hijriah/')}>pengenalan dua belas bulan
+          Hijriah</a> untuk arti nama dan peristiwa di masing-masing bulan. Bila yang
+          Anda cari adalah penjelasan praktis, tulisan tentang
+          <a href={u('/blog/kenapa-awal-ramadan-bisa-berbeda/')}>perbedaan awal
+          Ramadan</a> menguraikan hisab, rukyat, dan sidang isbat secara netral,
+          sedangkan <a href={u('/blog/cara-konversi-tanggal-hijriah/')}>panduan
+          konversi tanggal</a> menunjukkan cara mengubah tanggal Hijriah ke Masehi
+          (dan sebaliknya) dengan contoh yang sudah kami verifikasi terhadap ketetapan
+          resmi. Menjelang musim haji, tulisan tentang
+          <a href={u('/blog/idul-adha-dan-hari-arafah/')}>Idul Adha dan hari Arafah</a>
+          merangkai makna serta urutan hari-harinya.
+        </p>
+        <p>
+          Setiap tulisan yang menyangkut tanggal selalu menyebut metodenya. Tanggal
+          yang dihitung perkakas situs ini mengikuti hisab kalender Umm al-Qura,
+          sedangkan tanggal resmi ibadah di Indonesia mengikuti ketetapan pemerintah.
+          Keduanya kami tampilkan apa adanya — termasuk ketika berbeda satu hari —
+          agar pembaca dapat mengambil keputusan dengan informasi yang utuh. Metode
+          dan hasil verifikasi lengkapnya kami buka di halaman
+          <a href={u('/tentang/')}>tentang &amp; metode</a>, sehingga setiap angka
+          yang Anda temukan di situs ini dapat ditelusur kembali sumber dan cara
+          hitungnya. Selamat membaca; bila ada koreksi atau usul topik, sampaikan
+          melalui halaman <a href={u('/kontak/')}>kontak</a>.
+        </p>
+      </div>
+
+      <div class="daftar-artikel sempit" style="margin-left:auto;margin-right:auto">
+        {ARTIKEL.map((a) => (
+          <div class="kartu">
+            <p class="tgl">{a.tanggalTampil}</p>
+            <h3><a href={u(`/blog/${a.slug}/`)}>{a.judul}</a></h3>
+            <p>{a.deskripsi}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Utama>

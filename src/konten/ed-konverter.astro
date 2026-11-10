@@ -1,0 +1,87 @@
+---
+import { u } from '../lib/base.js';
+---
+<section class="ed">
+  <h2>Konverter Tanggal Masehi ke Hijriah dan Sebaliknya</h2>
+  <p>Halaman konverter di situs ini berfungsi mengubah tanggal Masehi menjadi tanggal Hijriah, dan sebaliknya mengubah tanggal Hijriah menjadi tanggal Masehi. Kebutuhan seperti ini muncul dalam banyak situasi sehari-hari: memeriksa tanggal lahir dalam penanggalan Hijriah, membaca tanggal pada dokumen atau naskah lama, menyiapkan undangan yang mencantumkan dua penanggalan sekaligus, atau memperkirakan kapan suatu hari besar akan jatuh pada tahun mendatang. Konverter yang baik harus memberikan hasil yang konsisten, dapat diperiksa ulang, dan disertai penjelasan mengenai metode serta batas ketepatannya.</p>
+  <p>Konverter di HijriahKu bekerja sepenuhnya di peramban pengunjung dengan memanfaatkan fasilitas kalender internasional yang tersedia pada semua peramban modern. Tidak ada tanggal yang dikirim ke peladen untuk dihitung. Penjelasan pada halaman ini menerangkan cara kerja metode yang dipakai, alasan mengapa konversi tidak dapat dilakukan dengan hitungan tambah dan kurang yang sederhana, contoh perhitungan yang telah terverifikasi, serta batas akurasi yang perlu diketahui sebelum hasil konversi digunakan.</p>
+
+  <h2>Cara Kerja Kalender Umm al-Qura</h2>
+  <p>Mesin konversi di situs ini menggunakan kalender Umm al-Qura melalui fasilitas Intl, yaitu antarmuka internasionalisasi yang tersedia di semua peramban. Kalender Umm al-Qura adalah kalender Hijriah yang dipakai sebagai kalender sipil resmi di Arab Saudi untuk urusan pemerintahan dan administrasi sehari-hari. Namanya merujuk pada Umm al-Qura, sebutan untuk kota Makkah, karena perhitungan awal bulannya dikaitkan dengan keadaan hilal untuk wilayah Makkah.</p>
+  <p>Sifat utama kalender ini adalah aritmetik atau hisab. Artinya, awal setiap bulan ditentukan berdasarkan perhitungan yang tetap mengenai siklus Bulan, bukan berdasarkan hasil pengamatan hilal pada malam tertentu di suatu tempat. Perhitungan tersebut disusun mengikuti kriteria kemunculan bulan sabit untuk Makkah, lalu hasilnya dibakukan menjadi urutan bulan yang teratur dan dapat dihitung jauh ke masa lalu maupun masa depan tanpa menunggu pengamatan. Karena sifatnya yang tetap inilah kalender Umm al-Qura dapat diterapkan secara seragam oleh sistem komputer di seluruh dunia melalui fasilitas Intl yang sama.</p>
+  <p>Dalam praktiknya, ketika pengunjung memasukkan tanggal Masehi, peramban meminta sistem kalender Umm al-Qura menyebutkan tanggal Hijriah yang bertepatan dengan hari tersebut. Sebaliknya, ketika pengunjung memasukkan tanggal Hijriah, sistem mencari tanggal Masehi yang bertepatan dengannya. Kedua arah konversi ini menggunakan rujukan kalender yang sama, sehingga hasil bolak-balik akan saling konsisten: mengonversi sebuah tanggal ke Hijriah lalu mengembalikannya ke Masehi akan menghasilkan tanggal semula.</p>
+  <blockquote>
+    <p>Tanggal Hijriah di situs ini mengikuti hisab kalender Umm al-Qura. Tanggal resmi awal Ramadan, Idul Fitri, dan Idul Adha di Indonesia ditetapkan lewat sidang isbat Kementerian Agama dan dapat berbeda satu hari.</p>
+  </blockquote>
+  <p>Kutipan di atas adalah label metode resmi situs ini. Label tersebut dicantumkan agar pengunjung tidak keliru menganggap hasil konverter sebagai ketetapan resmi pemerintah Indonesia. Hasil konverter adalah hasil hisab menurut kalender Umm al-Qura, sedangkan tanggal resmi hari besar keagamaan di Indonesia ditetapkan melalui proses tersendiri yang dijelaskan pada bagian batas akurasi di bawah.</p>
+
+  <h2>Mengapa Konversi Tidak Bisa Dilakukan dengan Tambah-Kurang Sederhana?</h2>
+  <p>Sekilas, mengubah tanggal Masehi ke Hijriah tampak seperti soal menggeser angka tahun saja, misalnya dengan mengurangi tahun Masehi dengan bilangan tertentu. Cara seperti itu tidak tepat dan akan menghasilkan tanggal yang meleset jauh, karena kedua kalender berbeda dalam hampir semua unsur penyusunnya.</p>
+  <ul>
+    <li>Panjang tahun berbeda. Tahun Hijriah berjumlah 354 hari pada tahun biasa dan 355 hari pada tahun kabisat, sedangkan tahun Masehi berjumlah 365 atau 366 hari. Selisih sekitar 11 hari per tahun menumpuk dengan cepat: dalam tiga tahun saja selisihnya sudah melebihi satu bulan penuh.</li>
+    <li>Panjang bulan berbeda. Bulan Hijriah selalu 29 atau 30 hari mengikuti siklus Bulan, sedangkan bulan Masehi berkisar antara 28 dan 31 hari mengikuti aturan kalender matahari. Tidak ada padanan tetap antara tanggal dalam bulan di kedua kalender.</li>
+    <li>Titik awal berbeda. Penomoran tahun Hijriah dimulai dari 1 Muharam 1 Hijriah yang setara dengan 16 Juli 622 Masehi dalam kalender Julian, sedangkan penomoran Masehi dimulai dari titik yang jauh lebih awal. Selisih titik awal ini harus dijembatani dengan hitungan hari yang utuh, bukan sekadar selisih angka tahun.</li>
+    <li>Pergeseran bersifat kumulatif dan berputar. Karena bulan Hijriah bergeser sekitar 11 hari lebih awal setiap tahun dan berputar melewati semua musim dalam waktu sekitar 33 tahun, satu tanggal Hijriah dapat jatuh pada bulan Masehi yang sama sekali berbeda pada dekade yang berbeda.</li>
+  </ul>
+  <p>Karena alasan-alasan tersebut, cara yang benar adalah menghitung jumlah hari yang telah berlalu sejak suatu titik rujukan yang pasti, lalu memetakan jumlah hari itu ke dalam kalender tujuan. Itulah yang dilakukan oleh mesin kalender di peramban secara internal. Pengunjung tidak perlu melakukan hitungan tersebut secara manual, tetapi memahaminya membantu menjelaskan mengapa dua tanggal yang tampak berdekatan dalam satu kalender belum tentu berdekatan dengan cara yang sama dalam kalender lainnya.</p>
+
+  <h2>Contoh Terhitung yang Telah Terverifikasi</h2>
+  <p>Agar pengunjung dapat memeriksa sendiri cara kerja konverter, berikut dua contoh yang hasilnya telah diverifikasi terhadap ketetapan resmi dalam Surat Keputusan Bersama Tiga Menteri mengenai hari libur nasional. Kedua contoh ini kebetulan menghasilkan tanggal yang sama persis antara hasil mesin dan tanggal resmi.</p>
+  <h3>Contoh Pertama: 27 Mei 2026 Menjadi 10 Dzulhijah 1447 Hijriah</h3>
+  <ol>
+    <li>Masukkan tanggal Masehi 27 Mei 2026 pada kolom konverter, dengan hari 27, bulan Mei, dan tahun 2026.</li>
+    <li>Mesin menghitung hari tersebut menurut kalender Umm al-Qura melalui fasilitas Intl di peramban.</li>
+    <li>Hasil yang ditampilkan adalah 10 Dzulhijah 1447 Hijriah.</li>
+    <li>Periksa hasilnya: tanggal 10 Dzulhijah adalah tanggal Idul Adha, dan Surat Keputusan Bersama Tiga Menteri menetapkan Idul Adha 1447 Hijriah jatuh pada 27 Mei 2026. Hasil mesin dan tanggal resmi pada contoh ini sama persis.</li>
+  </ol>
+  <h3>Contoh Kedua: 16 Januari 2026 Menjadi 27 Rajab 1447 Hijriah</h3>
+  <ol>
+    <li>Masukkan tanggal Masehi 16 Januari 2026 pada kolom konverter, dengan hari 16, bulan Januari, dan tahun 2026.</li>
+    <li>Mesin menghitung hari tersebut menurut kalender Umm al-Qura melalui fasilitas Intl di peramban.</li>
+    <li>Hasil yang ditampilkan adalah 27 Rajab 1447 Hijriah.</li>
+    <li>Periksa hasilnya: tanggal 27 Rajab diperingati sebagai Isra Mikraj, dan ketetapan resmi menempatkan peringatan Isra Mikraj 1447 Hijriah pada 16 Januari 2026. Hasil mesin dan tanggal resmi pada contoh ini juga sama persis.</li>
+  </ol>
+  <p>Contoh lain yang juga cocok dengan ketetapan resmi antara lain 16 Juni 2026 yang bertepatan dengan 1 Muharam 1448 Hijriah sebagai awal tahun baru Hijriah, 25 Agustus 2026 yang bertepatan dengan 12 Rabiulawal 1448 Hijriah pada peringatan Maulid, 5 Januari 2027 yang bertepatan dengan 27 Rajab 1448 Hijriah, dan 6 Juni 2027 yang bertepatan dengan 1 Muharam 1449 Hijriah. Sementara itu, menurut mesin yang sama, tanggal 1 Ramadan 1448 Hijriah bertepatan dengan 8 Februari 2027, yang dapat dipakai sebagai perkiraan awal sebelum ketetapan resmi diumumkan. Pengunjung dapat melanjutkan pemeriksaan tanggal-tanggal tersebut pada halaman <a href={u('/kalender-hijriah/')}>kalender Hijriah</a> atau melihat sisa harinya pada halaman <a href={u('/hitung-mundur/')}>hitung mundur</a>.</p>
+
+  <h2>Konversi Balik: dari Hijriah ke Masehi</h2>
+  <p>Konversi dari Hijriah ke Masehi memerlukan cara yang sedikit berbeda. Fasilitas kalender di peramban pada dasarnya menjawab pertanyaan dalam satu arah dengan sangat cepat, yaitu menyebutkan tanggal Hijriah untuk suatu tanggal Masehi yang diberikan. Untuk arah sebaliknya, tidak ada rumus tambah-kurang langsung yang dapat dipakai, dengan alasan perbedaan panjang tahun dan bulan yang telah dijelaskan di atas.</p>
+  <p>Sebagai gantinya, konversi balik dilakukan dengan pencarian tanggal. Konsepnya sederhana dan dapat dipahami tanpa pengetahuan pemrograman. Sistem mula-mula mengambil sebuah perkiraan tanggal Masehi yang dekat dengan sasaran, lalu memeriksa tanggal Hijriahnya. Apabila hasil pemeriksaan masih lebih awal dari tanggal Hijriah yang dicari, pencarian bergerak maju; apabila sudah melewati sasaran, pencarian bergerak mundur. Langkah pemeriksaan dan penyesuaian ini diulang dengan loncatan yang semakin kecil sampai ditemukan tepat satu tanggal Masehi yang padanan Hijriahnya sama dengan tanggal yang dimasukkan pengunjung. Karena setiap tanggal Masehi memiliki tepat satu padanan Hijriah dan urutan kedua kalender berjalan searah, pencarian semacam ini selalu berakhir pada satu jawaban yang pasti.</p>
+  <p>Bagi pengunjung, proses tersebut tidak terlihat dan berlangsung seketika. Yang penting untuk diketahui adalah bahwa hasil konversi balik sama dapat dipercayanya dengan hasil konversi maju, karena keduanya merujuk pada urutan hari yang sama dalam kalender Umm al-Qura. Apabila pengunjung mengonversi tanggal Hijriah ke Masehi lalu mengonversi hasilnya kembali ke Hijriah, tanggal Hijriah semula akan diperoleh kembali.</p>
+
+  <h2>Batas Akurasi: Kapan Hasil Dapat Berbeda Satu Hari?</h2>
+  <p>Konverter ini akurat menurut metodenya sendiri, yaitu hisab aritmetik kalender Umm al-Qura. Namun tanggal resmi awal bulan tertentu di Indonesia, terutama awal Ramadan, awal Syawal, dan awal Dzulhijah, tidak ditetapkan dengan hisab tetap semacam itu. Kementerian Agama menetapkannya melalui sidang isbat, yang mempertimbangkan perhitungan hisab dan laporan rukyatul hilal dari berbagai daerah. Muhammadiyah menggunakan hisab hakiki dengan kriteria wujudul hilal, sedangkan Nahdlatul Ulama menggunakan rukyat disertai istikmal apabila hilal tidak terlihat. Perbedaan pendekatan ini disampaikan secara netral sebagai fakta metode, dan situs ini tidak mengambil keberpihakan di antara pendekatan-pendekatan tersebut.</p>
+  <p>Akibat perbedaan metode tersebut, pada beberapa tanggal penting hasil mesin Umm al-Qura berada satu hari lebih awal dibandingkan tanggal resmi menurut Surat Keputusan Bersama Tiga Menteri. Tiga jangkar yang telah terverifikasi perbedaannya adalah sebagai berikut.</p>
+  <table>
+    <thead>
+      <tr><th>Tanggal Hijriah</th><th>Tanggal Resmi menurut SKB 3 Menteri</th><th>Hasil Mesin Umm al-Qura</th><th>Selisih</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1 Syawal 1447 Hijriah (Idul Fitri)</td><td>21 Maret 2026</td><td>20 Maret 2026</td><td>Mesin 1 hari lebih awal</td></tr>
+      <tr><td>1 Syawal 1448 Hijriah (Idul Fitri)</td><td>10 Maret 2027</td><td>9 Maret 2027</td><td>Mesin 1 hari lebih awal</td></tr>
+      <tr><td>10 Dzulhijah 1448 Hijriah (Idul Adha)</td><td>17 Mei 2027</td><td>16 Mei 2027</td><td>Mesin 1 hari lebih awal</td></tr>
+    </tbody>
+  </table>
+  <p>Pola pada tabel tersebut konsisten: pada ketiga jangkar, hasil hisab murni berada satu hari lebih awal dari tanggal resmi. Hal ini dapat terjadi karena penetapan resmi menunggu proses sidang isbat dan hasil rukyat, termasuk kemungkinan penggenapan bulan berjalan menjadi 30 hari atau istikmal, sedangkan kalender aritmetik langsung menetapkan awal bulan berdasarkan perhitungan tetapnya. Sebaliknya, pada jangkar lain seperti Idul Adha 1447 Hijriah dan Isra Mikraj, kedua pendekatan menghasilkan tanggal yang sama, sebagaimana ditunjukkan pada contoh terverifikasi di atas.</p>
+  <p>Kesimpulan praktisnya jelas. Untuk keperluan perkiraan, perencanaan pribadi, dan pencatatan umum, hasil konverter ini dapat digunakan sebagaimana adanya. Untuk penetapan resmi hari libur, cuti bersama, dan pelaksanaan hari besar keagamaan di Indonesia, tanggal yang berlaku adalah tanggal yang ditetapkan pemerintah melalui sidang isbat dan diumumkan secara resmi. Penjelasan mengenai latar belakang situs dan metodenya juga tersedia pada halaman <a href={u('/tentang/')}>tentang</a>.</p>
+
+  <h2>Tips Memakai Konverter</h2>
+  <ul>
+    <li><strong>Tanggal lahir.</strong> Masukkan tanggal lahir Masehi untuk mengetahui padanan Hijriahnya. Hasil ini sering dipakai untuk melengkapi catatan keluarga, membandingkan dengan catatan orang tua yang menuliskan tanggal Hijriah, atau sekadar mengetahui bulan Hijriah kelahiran seseorang.</li>
+    <li><strong>Dokumen lama.</strong> Apabila menemukan tanggal Hijriah pada dokumen lama, surat, atau prasasti, gunakan konversi balik untuk menemukan padanan Masehinya. Perlu diingat bahwa penulis dokumen lama mungkin menggunakan kalender Hijriah setempat pada masanya, sehingga perbedaan satu hari dari hasil mesin masih mungkin terjadi dan sebaiknya dicatat sebagai rentang apabila ketepatan satu hari sangat menentukan.</li>
+    <li><strong>Perkiraan hari besar.</strong> Gunakan konverter untuk memperkirakan tanggal Ramadan, Idul Fitri, atau Idul Adha pada tahun-tahun mendatang, misalnya untuk merencanakan cuti atau acara keluarga jauh hari sebelumnya. Tandai hasil tersebut sebagai perkiraan, karena tanggal resmi di Indonesia baru pasti setelah sidang isbat, dan dapat berbeda satu hari dari hasil mesin. Halaman <a href={u('/hitung-mundur/')}>hitung mundur</a> membantu memantau sisa waktu menuju perkiraan tanggal tersebut.</li>
+    <li><strong>Periksa dua arah.</strong> Untuk memastikan tidak ada kekeliruan pengetikan, konversikan hasil yang diperoleh kembali ke kalender asal. Apabila tanggal semula muncul kembali, masukan yang dimasukkan sudah konsisten.</li>
+    <li><strong>Perhatikan tahun kabisat.</strong> Tahun Hijriah dapat berjumlah 354 atau 355 hari. Perbedaan satu hari pada tahun kabisat adalah bagian wajar dari perhitungan dan bukan tanda adanya kesalahan pada konverter.</li>
+  </ul>
+
+  <h2>Pertanyaan yang Sering Diajukan</h2>
+  <h3>Mengapa hasil konverter bisa berbeda satu hari dari tanggal resmi Idul Fitri?</h3>
+  <p>Karena konverter mengikuti hisab aritmetik kalender Umm al-Qura, sedangkan tanggal resmi Idul Fitri di Indonesia ditetapkan melalui sidang isbat Kementerian Agama yang mempertimbangkan rukyatul hilal. Pada 1 Syawal 1447 Hijriah, tanggal resmi adalah 21 Maret 2026 sedangkan hasil mesin adalah 20 Maret 2026. Pola yang sama tercatat pada 1 Syawal 1448 Hijriah. Untuk keperluan resmi, gunakan tanggal ketetapan pemerintah.</p>
+  <h3>Apakah konverter ini dapat dipakai untuk tanggal yang jauh di masa lalu?</h3>
+  <p>Dapat, selama tanggal tersebut berada dalam rentang yang didukung kalender Umm al-Qura pada peramban. Perlu diingat bahwa kalender ini adalah kalender aritmetik modern yang diproyeksikan ke masa lalu, sehingga untuk peristiwa sejarah yang sangat lama, hasilnya adalah padanan menurut perhitungan kalender ini dan belum tentu sama dengan pencatatan setempat pada zaman tersebut. Sebagai rujukan, 1 Muharam 1 Hijriah setara dengan 16 Juli 622 Masehi dalam kalender Julian.</p>
+  <h3>Bagaimana cara mengonversi tanggal Hijriah ke Masehi?</h3>
+  <p>Pilih arah konversi Hijriah ke Masehi pada halaman konverter, lalu masukkan hari, bulan, dan tahun Hijriahnya. Di balik layar, sistem melakukan pencarian tanggal Masehi yang padanan Hijriahnya tepat sama dengan masukan tersebut. Hasilnya ditampilkan seketika, dan pengunjung dapat memeriksanya dengan mengonversi kembali ke arah sebaliknya atau melihatnya pada <a href={u('/kalender-hijriah/')}>kalender Hijriah</a>.</p>
+  <h3>Apakah tanggal yang saya masukkan dikirim ke peladen?</h3>
+  <p>Tidak. Seluruh perhitungan dilakukan oleh fasilitas kalender yang tersedia di peramban pengunjung sendiri melalui Intl. Tanggal yang dimasukkan tidak perlu dikirim ke mana pun untuk dikonversi, dan konverter tetap bekerja dengan cara yang sama pada kunjungan berikutnya.</p>
+  <h3>Kapan sebaiknya saya menunggu ketetapan resmi pemerintah?</h3>
+  <p>Apabila hasil konversi akan dipakai untuk menentukan hari pelaksanaan ibadah yang tanggal resminya ditetapkan negara, hari libur, atau cuti bersama, sebaiknya tunggu pengumuman resmi setelah sidang isbat. Untuk perkiraan dan perencanaan awal, hasil konverter sudah memadai, dengan catatan adanya kemungkinan perbedaan satu hari sebagaimana dijelaskan pada bagian batas akurasi.</p>
+</section>
